@@ -1,0 +1,59 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: kapa.ai
+providerId: kapa-ai
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- Answer Engine
+- RAG
+- Documentation
+- Developer Tools
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The kapa.ai Query API authenticates with an X-API-KEY and meters usage
+  primarily by questions/answers against a contracted monthly volume rather
+  than by a published per-second request rate. kapa.ai does not document a
+  public numeric rate-limit table; per-account request throttling and the
+  monthly question quota are governed by the customer's plan and enforced
+  server-side. Specific per-endpoint values are not reconciled in this
+  artifact.
+notes: >-
+  Verify concurrency limits, per-key request throttling, and the contracted
+  monthly question quota with kapa.ai during reconciliation; values vary by
+  agreement.
+sources:
+- https://docs.kapa.ai/api/overview
+- https://docs.kapa.ai/api/quickstart
+- https://docs.kapa.ai/api/faq
+responseCodes:
+  throttled: 429
+limits:
+- name: Monthly Questions Quota
+  scope: account
+  metric: questions
+  limit: see agreement
+  notes: Licensed volume of questions/answers per month set by the plan.
+- name: Requests Per Minute (RPM)
+  scope: api_key
+  metric: requests
+  limit: see provider documentation
+  notes: Per-key request throttling; not published as a public numeric value.
+- name: Concurrent Requests
+  scope: api_key
+  metric: concurrent
+  limit: see provider documentation
+  notes: Concurrency for chat and streamed chat endpoints, governed by plan.
+policies:
+- name: Quota-Based Limits
+  description: Usage is bounded by the contracted monthly question volume; overages are billed or throttled per agreement.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on 429 responses and honor Retry-After when present.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

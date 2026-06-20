@@ -1,0 +1,124 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: kapa.ai
+providerId: kapa-ai
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- Answer Engine
+- RAG
+- Documentation
+- Developer Tools
+- Plans
+description: >-
+  kapa.ai is sold sales-led with custom enterprise pricing rather than a
+  public self-serve price list. Pricing is typically structured as a platform
+  fee plus a licensed volume of questions/answers per month, scaled by team
+  size, number of knowledge bases ingested, user volume, and the level of
+  support. There is no published per-token or per-call public rate card, so the
+  tiers below are representative and not reconciled against an official pricing
+  page.
+notes: >-
+  kapa.ai does not publish a transparent self-serve price list; figures are
+  not available publicly and pricing is negotiated. Contact kapa.ai sales for
+  a quote and reconcile this artifact against any contract or order form.
+sources:
+- https://www.kapa.ai/pricing
+- https://docs.kapa.ai/api/overview
+- https://www.kapa.ai/
+plans:
+- id: kapa-ai-trial
+  name: Trial / Proof of Concept
+  type: trial
+  description: >-
+    Time-boxed evaluation against a customer's own documentation to validate
+    answer quality before a commercial agreement.
+  entries:
+  - label: Evaluation Access
+    name: trial
+    type: trial
+    metric: period
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Website Widget
+  - name: Docs Q&A
+- id: kapa-ai-platform
+  name: Platform Subscription
+  type: subscription
+  description: >-
+    Annual platform subscription bundling a licensed volume of questions per
+    month across the website widget, in-app assistant, Slack/Discord bots, and
+    the Query API/SDK, with analytics.
+  entries:
+  - label: Platform Fee
+    name: platform_fee
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  - label: Included Questions
+    name: questions_included
+    type: usage
+    metric: questions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included up to licensed volume
+    userMultiplied: false
+  - label: Question Overage
+    name: questions_overage
+    type: usage
+    metric: questions
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales (per-question overage)
+    userMultiplied: false
+  elements:
+  - name: Query Chat API
+  - name: Threads / Conversations
+  - name: Retrieval and Search
+  - name: Website Widget
+  - name: In-App Assistant
+  - name: Slack / Discord Bots
+  - name: Analytics
+- id: kapa-ai-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom enterprise agreements with higher question volumes, multiple
+    knowledge bases, SSO/security review, dedicated support, and negotiated
+    platform and overage terms. Contact kapa.ai sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: Multiple Knowledge Bases
+  - name: SSO and Security Review
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

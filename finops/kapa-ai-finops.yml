@@ -1,0 +1,98 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: kapa.ai
+providerId: kapa-ai
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- Answer Engine
+- RAG
+- Documentation
+- Developer Tools
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of kapa.ai spend. kapa.ai is sold sales-led as an annual platform
+  subscription plus a licensed volume of questions/answers per month, with
+  overage charges beyond the contracted volume. Cost is driven by question
+  volume across the website widget, in-app assistant, bots, and the Query API,
+  scaled by number of knowledge bases and support level. There is no public
+  per-token or per-call rate card, so meters below are representative and not
+  reconciled.
+notes: >-
+  Per-contract platform fees, included question volume, and overage rates are
+  negotiated and not public; verify against the order form during
+  reconciliation.
+sources:
+- https://www.kapa.ai/pricing
+- https://docs.kapa.ai/api/overview
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: kapa.ai
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Annual
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: kapa.ai
+  ServiceCategory: AI and Machine Learning
+  ProviderName: kapa.ai
+  PublisherName: kapa.ai
+  InvoiceIssuerName: kapa.ai
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: platform_subscription
+  description: Annual platform fee for the kapa.ai subscription.
+  unit: contract
+  aggregation: sum
+  dimensions:
+  - account
+- name: questions
+  description: Questions/answers served against the contracted monthly volume.
+  unit: questions
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+  - integration
+- name: question_overage
+  description: Questions served beyond the contracted monthly volume, billed as overage.
+  unit: questions
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+- name: knowledge_bases
+  description: Number of projects / knowledge bases ingested and licensed.
+  unit: projects
+  aggregation: max
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Use the Analytics API (activity, question-answers, top questions) to track question volume per project and integration.
+- name: Allocation
+  description: Pass integration_id and end-user identifiers on each call to attribute usage to teams, products, and surfaces.
+- name: Optimization
+  description: Improve answer coverage to reduce repeated questions; consolidate knowledge bases; monitor coverage gaps to cut deflection cost.
+- name: Accountability
+  description: Assign owners per project; review monthly question burn against the contracted volume to avoid overage.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

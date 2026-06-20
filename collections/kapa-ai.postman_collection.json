@@ -1,0 +1,550 @@
+{
+  "item": [
+    {
+      "name": "Chat",
+      "description": {
+        "content": "Ask questions and create threads.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Chat",
+          "request": {
+            "name": "Chat",
+            "description": {
+              "content": "Ask the project's kapa.ai instance a question. Creates a new Thread and returns the answer with relevant sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/projects/:project_id/chat",
+              "path": ["query", "v1", "projects", ":project_id", "chat"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"{{integrationId}}\",\n  \"user\": {\n    \"email\": \"user@example.com\"\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Chat streamed",
+          "request": {
+            "name": "Chat streamed",
+            "description": {
+              "content": "Streamed chat. Answer chunks are delimited by the Unicode record separator character (U+241E).",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/projects/:project_id/chat/stream",
+              "path": ["query", "v1", "projects", ":project_id", "chat", "stream"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"{{integrationId}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Custom chat",
+          "request": {
+            "name": "Custom chat",
+            "description": {
+              "content": "Chat using caller-supplied context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/projects/:project_id/chat/custom",
+              "path": ["query", "v1", "projects", ":project_id", "chat", "custom"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"{{integrationId}}\",\n  \"context\": \"Additional grounding context.\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Threads",
+      "description": {
+        "content": "List, retrieve, and continue conversations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Chat in thread",
+          "request": {
+            "name": "Chat in thread",
+            "description": {
+              "content": "Ask a follow-up question within an existing Thread.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/threads/:thread_id/chat",
+              "path": ["query", "v1", "threads", ":thread_id", "chat"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "thread_id", "value": "{{threadId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"Can you elaborate?\",\n  \"integration_id\": \"{{integrationId}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Chat in thread streamed",
+          "request": {
+            "name": "Chat in thread streamed",
+            "description": {
+              "content": "Streamed follow-up question within an existing Thread.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/threads/:thread_id/chat/stream",
+              "path": ["query", "v1", "threads", ":thread_id", "chat", "stream"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "thread_id", "value": "{{threadId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"Can you elaborate?\",\n  \"integration_id\": \"{{integrationId}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Retrieve a thread",
+          "request": {
+            "name": "Retrieve a thread",
+            "description": {
+              "content": "Retrieve a single Thread object and its messages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/threads/:thread_id",
+              "path": ["query", "v1", "threads", ":thread_id"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "thread_id", "value": "{{threadId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "name": "List threads",
+          "request": {
+            "name": "List threads",
+            "description": {
+              "content": "List Thread objects for a project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/projects/:project_id/threads",
+              "path": ["query", "v1", "projects", ":project_id", "threads"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "name": "Upsert feedback",
+          "request": {
+            "name": "Upsert feedback",
+            "description": {
+              "content": "Submit or update feedback on a question/answer using its question_answer_id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/feedback",
+              "path": ["query", "v1", "feedback"],
+              "host": ["{{baseUrl}}"],
+              "query": []
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question_answer_id\": \"{{questionAnswerId}}\",\n  \"reaction\": \"upvote\",\n  \"comment\": \"Helpful answer.\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Retrieval",
+      "description": {
+        "content": "Semantic retrieval and keyword search.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Retrieval",
+          "request": {
+            "name": "Retrieval",
+            "description": {
+              "content": "Semantic retrieval against ingested knowledge sources without LLM generation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/projects/:project_id/retrieval",
+              "path": ["query", "v1", "projects", ":project_id", "retrieval"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"How do I configure authentication?\",\n  \"num_results\": 5\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Search (deprecated)",
+          "request": {
+            "name": "Search (deprecated)",
+            "description": {
+              "content": "Deprecated keyword search across knowledge sources. Use Retrieval instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/projects/:project_id/search?query=getting started",
+              "path": ["query", "v1", "projects", ":project_id", "search"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "query", "value": "getting started" }
+              ],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "description": {
+        "content": "Projects, integrations, and sources.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Retrieve a project",
+          "request": {
+            "name": "Retrieve a project",
+            "url": {
+              "raw": "{{baseUrl}}/org/v1/projects/:project_id",
+              "path": ["org", "v1", "projects", ":project_id"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "name": "List all integrations",
+          "request": {
+            "name": "List all integrations",
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/projects/:project_id/integrations",
+              "path": ["query", "v1", "projects", ":project_id", "integrations"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "name": "List all sources",
+          "request": {
+            "name": "List all sources",
+            "url": {
+              "raw": "{{baseUrl}}/ingestion/v1/projects/:project_id/sources",
+              "path": ["ingestion", "v1", "projects", ":project_id", "sources"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "description": {
+        "content": "Activity, coverage gaps, and top questions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Activity data",
+          "request": {
+            "name": "Activity data",
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/projects/:project_id/activity",
+              "path": ["query", "v1", "projects", ":project_id", "activity"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "name": "List question answers",
+          "request": {
+            "name": "List question answers",
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/projects/:project_id/question-answers",
+              "path": ["query", "v1", "projects", ":project_id", "question-answers"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "name": "List end users",
+          "request": {
+            "name": "List end users",
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/projects/:project_id/end-users",
+              "path": ["query", "v1", "projects", ":project_id", "end-users"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "name": "List coverage gaps periods",
+          "request": {
+            "name": "List coverage gaps periods",
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/projects/:project_id/coverage-gaps/periods",
+              "path": ["query", "v1", "projects", ":project_id", "coverage-gaps", "periods"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "name": "Retrieve coverage gaps period",
+          "request": {
+            "name": "Retrieve coverage gaps period",
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/coverage-gaps/periods/:period_id",
+              "path": ["query", "v1", "coverage-gaps", "periods", ":period_id"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "period_id", "value": "{{periodId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "name": "List top questions periods",
+          "request": {
+            "name": "List top questions periods",
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/projects/:project_id/top-questions/periods",
+              "path": ["query", "v1", "projects", ":project_id", "top-questions", "periods"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "project_id", "value": "{{projectId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        },
+        {
+          "name": "Retrieve top questions period",
+          "request": {
+            "name": "Retrieve top questions period",
+            "url": {
+              "raw": "{{baseUrl}}/query/v1/top-questions/periods/:period_id",
+              "path": ["query", "v1", "top-questions", "periods", ":period_id"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "period_id", "value": "{{periodId}}" }
+              ]
+            },
+            "header": [
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "GET"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    { "type": "string", "value": "https://api.kapa.ai", "key": "baseUrl" },
+    { "type": "string", "value": "", "key": "projectId" },
+    { "type": "string", "value": "", "key": "threadId" },
+    { "type": "string", "value": "", "key": "integrationId" },
+    { "type": "string", "value": "", "key": "questionAnswerId" },
+    { "type": "string", "value": "", "key": "periodId" }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "X-API-KEY" },
+      { "key": "value", "value": "{{apiKey}}" },
+      { "key": "in", "value": "header" }
+    ]
+  },
+  "info": {
+    "_postman_id": "b3f1c2a4-9d6e-4f2b-8c7a-1e5d9a0b3c4f",
+    "name": "kapa.ai Query API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the kapa.ai answer platform. Ask retrieval-augmented questions, run threaded conversations (standard and streamed), perform semantic retrieval and search, submit feedback, and read project and analytics data. Authenticated with an X-API-KEY header.\n\nContact Support:\n Name: kapa.ai Support\n URL: https://docs.kapa.ai",
+      "type": "text/plain"
+    }
+  }
+}

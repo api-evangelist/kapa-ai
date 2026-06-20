@@ -1,0 +1,82 @@
+aid: kapa-ai
+name: kapa.ai
+review:
+  question: Does kapa.ai expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    kapa.ai's streamed chat endpoints deliver answers incrementally over an
+    HTTP response, with chunks delimited by the Unicode record separator
+    character (U+241E) rather than as canonical text/event-stream SSE
+    `data:` frames or a WebSocket. Because the streaming transport is a
+    record-separator-delimited HTTP chunked response (not SSE event framing
+    and not WebSocket), no AsyncAPI document was authored; the streaming
+    behavior is modeled in the OpenAPI as a text/plain streamed 200 response
+    on the /chat/stream and /threads/{id}/chat/stream endpoints.
+findings:
+  summary: |
+    kapa.ai does not publish a documented public WebSocket API. The kapa.ai
+    Query API is REST over HTTPS under https://api.kapa.ai, authenticated with
+    an X-API-KEY header. Streaming for chat is delivered as an incremental
+    HTTP response where chunks are split on the U+241E record separator
+    character; this is one-way HTTP streaming, not WebSocket and not standard
+    SSE event framing. No realtime, bidirectional, or audio-streaming
+    WebSocket (ws:// or wss://) endpoint is documented for chat, retrieval, or
+    any other surface.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.kapa.ai
+      documented: true
+    - protocol: HTTP Streaming
+      scheme: https
+      note: Streamed chat endpoints return answer chunks delimited by U+241E over a single HTTP response. Not WebSocket; not canonical SSE event framing.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the kapa.ai API reference as of the review date.
+  endpointsConfirmedRest:
+    - POST https://api.kapa.ai/query/v1/projects/{project_id}/chat
+    - POST https://api.kapa.ai/query/v1/projects/{project_id}/chat/stream
+    - POST https://api.kapa.ai/query/v1/projects/{project_id}/chat/custom
+    - POST https://api.kapa.ai/query/v1/threads/{thread_id}/chat
+    - POST https://api.kapa.ai/query/v1/threads/{thread_id}/chat/stream
+    - GET  https://api.kapa.ai/query/v1/threads/{thread_id}
+    - GET  https://api.kapa.ai/query/v1/projects/{project_id}/threads
+    - POST https://api.kapa.ai/query/v1/feedback
+    - POST https://api.kapa.ai/query/v1/projects/{project_id}/retrieval
+    - GET  https://api.kapa.ai/query/v1/projects/{project_id}/search
+    - GET  https://api.kapa.ai/org/v1/projects/{project_id}
+    - GET  https://api.kapa.ai/query/v1/projects/{project_id}/integrations
+    - GET  https://api.kapa.ai/ingestion/v1/projects/{project_id}/sources
+    - GET  https://api.kapa.ai/query/v1/projects/{project_id}/activity
+    - GET  https://api.kapa.ai/query/v1/projects/{project_id}/question-answers
+    - GET  https://api.kapa.ai/query/v1/projects/{project_id}/end-users
+    - GET  https://api.kapa.ai/query/v1/projects/{project_id}/coverage-gaps/periods
+    - GET  https://api.kapa.ai/query/v1/coverage-gaps/periods/{period_id}
+    - GET  https://api.kapa.ai/query/v1/projects/{project_id}/top-questions/periods
+    - GET  https://api.kapa.ai/query/v1/top-questions/periods/{period_id}
+sources:
+  - url: https://docs.kapa.ai/api/overview
+    type: Documentation
+    note: Overview lists the REST base URL https://api.kapa.ai and X-API-KEY auth; no WebSocket mentioned.
+  - url: https://docs.kapa.ai/api/reference
+    type: APIReference
+    note: All documented endpoints are HTTPS REST.
+  - url: https://docs.kapa.ai/api/reference/query-v-1-projects-chat-chat-stream
+    type: APIReference
+    note: Streamed chat returns chunks delimited by U+241E over an HTTP response, not WebSocket.
+  - url: https://docs.kapa.ai/api/quickstart
+    type: Documentation
+    note: Chat quickstart uses POST to /query/v1/projects/{id}/chat with X-API-KEY.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists, and the streaming transport is a
+    record-separator-delimited HTTP chunked response rather than canonical SSE
+    event framing or WebSocket. The streamed behavior is captured in the
+    OpenAPI specification, so no AsyncAPI artifact was authored.

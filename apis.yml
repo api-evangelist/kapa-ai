@@ -1,0 +1,152 @@
+aid: kapa-ai
+url: https://raw.githubusercontent.com/api-evangelist/kapa-ai/refs/heads/main/apis.yml
+name: kapa.ai
+kind: company
+description: kapa.ai is an AI assistant and answer platform that turns technical
+  documentation, GitHub content, forums, and developer products into a retrieval-augmented
+  chat experience. The kapa.ai Query API lets teams ask questions, run threaded
+  conversations with streaming answers, perform semantic retrieval and search, and
+  pull analytics over projects and threads via a REST interface authenticated with
+  an X-API-KEY header.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- AI
+- Answer Engine
+- RAG
+- Documentation
+- Developer Tools
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: kapa-ai:kapa-ai-query-chat-api
+  name: kapa.ai Query Chat API
+  tags:
+  - Chat
+  - Query
+  - RAG
+  - Streaming
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+  baseURL: https://api.kapa.ai/query/v1
+  properties:
+  - url: https://docs.kapa.ai/api/quickstart
+    type: Documentation
+  - url: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+    type: APIReference
+  - url: openapi/kapa-ai-openapi.yml
+    type: OpenAPI
+  - url: collections/kapa-ai.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kapa-ai.opencollection.json
+    type: OpenCollection
+  description: Ask a project's kapa.ai instance a question and receive a
+    retrieval-augmented answer with relevant sources. Each chat call creates a
+    new Thread; both standard and Server-Sent-Event style streamed variants are
+    available, plus a custom-chat endpoint for supplying your own context.
+- aid: kapa-ai:kapa-ai-threads-conversations-api
+  name: kapa.ai Threads Conversations API
+  tags:
+  - Threads
+  - Conversations
+  - Follow Up
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kapa.ai/api/reference
+  baseURL: https://api.kapa.ai/query/v1
+  properties:
+  - url: https://docs.kapa.ai/analytics/conversations
+    type: Documentation
+  - url: https://docs.kapa.ai/api/reference
+    type: APIReference
+  - url: openapi/kapa-ai-openapi.yml
+    type: OpenAPI
+  - url: collections/kapa-ai.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kapa-ai.opencollection.json
+    type: OpenCollection
+  description: List and retrieve Thread objects and continue a multi-turn
+    conversation by chatting in an existing thread, with standard and streamed
+    follow-up variants and a feedback endpoint for upserting reactions on a
+    question/answer.
+- aid: kapa-ai:kapa-ai-search-retrieval-api
+  name: kapa.ai Search and Retrieval API
+  tags:
+  - Search
+  - Retrieval
+  - Semantic
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kapa.ai/api/reference/query-v-1-projects-retrieval
+  baseURL: https://api.kapa.ai/query/v1
+  properties:
+  - url: https://docs.kapa.ai/api/reference/query-v-1-projects-retrieval
+    type: Documentation
+  - url: openapi/kapa-ai-openapi.yml
+    type: OpenAPI
+  - url: collections/kapa-ai.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kapa-ai.opencollection.json
+    type: OpenCollection
+  description: Semantic retrieval that returns the most relevant chunks from a
+    project's ingested knowledge sources without LLM generation, intended to
+    supply context to external LLMs and agents, alongside a deprecated keyword
+    search endpoint.
+- aid: kapa-ai:kapa-ai-projects-api
+  name: kapa.ai Projects API
+  tags:
+  - Projects
+  - Integrations
+  - Sources
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kapa.ai/api/overview
+  baseURL: https://api.kapa.ai
+  properties:
+  - url: https://docs.kapa.ai/api/overview
+    type: Documentation
+  - url: openapi/kapa-ai-openapi.yml
+    type: OpenAPI
+  - url: collections/kapa-ai.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kapa-ai.opencollection.json
+    type: OpenCollection
+  description: Retrieve a project and enumerate the integrations and ingested
+    sources configured for it, scoping every other Query API call to a
+    project_id.
+- aid: kapa-ai:kapa-ai-analytics-api
+  name: kapa.ai Analytics API
+  tags:
+  - Analytics
+  - Coverage Gaps
+  - Top Questions
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.kapa.ai/api/reference
+  baseURL: https://api.kapa.ai/query/v1
+  properties:
+  - url: https://docs.kapa.ai/api/reference
+    type: Documentation
+  - url: openapi/kapa-ai-openapi.yml
+    type: OpenAPI
+  - url: collections/kapa-ai.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kapa-ai.opencollection.json
+    type: OpenCollection
+  description: Read usage and quality analytics for a project - activity,
+    question/answers, end users, coverage-gap periods, and top-question periods -
+    to understand how the AI assistant is performing against the knowledge base.
+common:
+- type: GitHubOrganization
+  url: https://github.com/kapa-ai
+- type: LinkedIn
+  url: https://www.linkedin.com/company/kapa-ai
+- type: Website
+  url: https://www.kapa.ai
+- type: Documentation
+  url: https://docs.kapa.ai
+- type: Plans
+  url: plans/kapa-ai-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/kapa-ai-rate-limits.yml
+- type: FinOps
+  url: finops/kapa-ai-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,717 @@
+openapi: 3.0.1
+info:
+  title: kapa.ai Query API
+  description: >-
+    REST API for the kapa.ai answer platform. Ask a project's kapa.ai instance
+    questions and receive retrieval-augmented answers with sources, run threaded
+    multi-turn conversations (standard and streamed), perform semantic retrieval
+    and keyword search against ingested knowledge sources, submit feedback, and
+    read project, integration, source, and analytics data. All requests are
+    authenticated with an X-API-KEY header.
+  termsOfService: https://www.kapa.ai/content/terms-of-service
+  contact:
+    name: kapa.ai Support
+    url: https://docs.kapa.ai
+  version: '1.0'
+servers:
+  - url: https://api.kapa.ai
+    description: kapa.ai production API
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Chat
+    description: Ask questions and create threads.
+  - name: Threads
+    description: List, retrieve, and continue conversations.
+  - name: Retrieval
+    description: Semantic retrieval and keyword search.
+  - name: Feedback
+    description: Submit reactions on answers.
+  - name: Projects
+    description: Projects, integrations, and sources.
+  - name: Analytics
+    description: Activity, coverage gaps, and top questions.
+paths:
+  /query/v1/projects/{project_id}/chat:
+    post:
+      operationId: chat
+      tags:
+        - Chat
+      summary: Chat
+      description: >-
+        Ask the project's kapa.ai instance a question. Creates a new Thread and
+        returns the retrieval-augmented answer with relevant sources.
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/chat/stream:
+    post:
+      operationId: chatStream
+      tags:
+        - Chat
+      summary: Chat streamed
+      description: >-
+        Streamed variant of chat. The answer is delivered incrementally as
+        chunks delimited by the Unicode record separator character (U+241E),
+        so partial answers can be rendered as they are generated.
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: A stream of answer chunks delimited by U+241E.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/chat/custom:
+    post:
+      operationId: chatCustom
+      tags:
+        - Chat
+      summary: Custom chat
+      description: >-
+        Chat using caller-supplied context instead of (or in addition to) the
+        project's ingested knowledge sources.
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomChatRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/threads/{thread_id}/chat:
+    post:
+      operationId: chatInThread
+      tags:
+        - Threads
+      summary: Chat in thread
+      description: >-
+        Ask a follow-up question within an existing Thread, preserving the
+        conversation context.
+      parameters:
+        - $ref: '#/components/parameters/ThreadId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/threads/{thread_id}/chat/stream:
+    post:
+      operationId: chatInThreadStream
+      tags:
+        - Threads
+      summary: Chat in thread streamed
+      description: >-
+        Streamed follow-up question within an existing Thread. Chunks are
+        delimited by the Unicode record separator character (U+241E).
+      parameters:
+        - $ref: '#/components/parameters/ThreadId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: A stream of answer chunks delimited by U+241E.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/threads/{thread_id}:
+    get:
+      operationId: getThread
+      tags:
+        - Threads
+      summary: Retrieve a thread
+      description: Retrieve a single Thread object and its messages.
+      parameters:
+        - $ref: '#/components/parameters/ThreadId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Thread'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/threads:
+    get:
+      operationId: listThreads
+      tags:
+        - Threads
+      summary: List threads
+      description: List Thread objects for a project.
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreadList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/feedback:
+    post:
+      operationId: upsertFeedback
+      tags:
+        - Feedback
+      summary: Upsert feedback
+      description: >-
+        Submit or update feedback (a reaction and optional comment) on a
+        specific question/answer using its question_answer_id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedbackRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedbackResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/retrieval:
+    post:
+      operationId: retrieval
+      tags:
+        - Retrieval
+      summary: Retrieval
+      description: >-
+        Semantic retrieval against the project's ingested knowledge sources
+        without LLM generation. Returns the most relevant chunks in descending
+        order of relevance, for use as context for external LLMs and agents.
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrievalRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrievalResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/search:
+    get:
+      operationId: search
+      tags:
+        - Retrieval
+      summary: Search (deprecated)
+      description: >-
+        Deprecated fast keyword-based search across the project's knowledge
+        sources. Use the retrieval endpoint for semantic search.
+      deprecated: true
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The search query string.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrievalResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /org/v1/projects/{project_id}:
+    get:
+      operationId: getProject
+      tags:
+        - Projects
+      summary: Retrieve a project
+      description: Retrieve a single project by id.
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/integrations:
+    get:
+      operationId: listIntegrations
+      tags:
+        - Projects
+      summary: List all integrations
+      description: List the integrations configured for a project.
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /ingestion/v1/projects/{project_id}/sources:
+    get:
+      operationId: listSources
+      tags:
+        - Projects
+      summary: List all sources
+      description: List the ingested knowledge sources for a project.
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/activity:
+    get:
+      operationId: getActivity
+      tags:
+        - Analytics
+      summary: Activity data
+      description: Retrieve activity/usage analytics for a project.
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/question-answers:
+    get:
+      operationId: listQuestionAnswers
+      tags:
+        - Analytics
+      summary: List question answers
+      description: List question/answer records for a project.
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/end-users:
+    get:
+      operationId: listEndUsers
+      tags:
+        - Analytics
+      summary: List end users
+      description: List end users that have interacted with the project.
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/coverage-gaps/periods:
+    get:
+      operationId: listCoverageGapsPeriods
+      tags:
+        - Analytics
+      summary: List coverage gaps periods
+      description: List coverage-gap analysis periods for a project.
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/coverage-gaps/periods/{period_id}:
+    get:
+      operationId: getCoverageGapsPeriod
+      tags:
+        - Analytics
+      summary: Retrieve coverage gaps period
+      description: Retrieve a single coverage-gap period by id.
+      parameters:
+        - name: period_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/top-questions/periods:
+    get:
+      operationId: listTopQuestionsPeriods
+      tags:
+        - Analytics
+      summary: List top questions periods
+      description: List top-question analysis periods for a project.
+      parameters:
+        - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/top-questions/periods/{period_id}:
+    get:
+      operationId: getTopQuestionsPeriod
+      tags:
+        - Analytics
+      summary: Retrieve top questions period
+      description: Retrieve a single top-question period by id.
+      parameters:
+        - name: period_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: kapa.ai project API key, created in the API Keys tab of the platform.
+  parameters:
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: The kapa.ai project (instance) identifier.
+      schema:
+        type: string
+        format: uuid
+    ThreadId:
+      name: thread_id
+      in: path
+      required: true
+      description: The Thread identifier returned by a chat call.
+      schema:
+        type: string
+        format: uuid
+    PageSize:
+      name: page_size
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
+    PageNumber:
+      name: page_number
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+  responses:
+    Unauthorized:
+      description: Missing or invalid X-API-KEY.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The user's question.
+          example: How do I get started?
+        integration_id:
+          type: string
+          description: >-
+            Integration identifier used to attribute usage analytics; calls
+            without it appear as the "Unknown" integration.
+        user:
+          $ref: '#/components/schemas/User'
+    CustomChatRequest:
+      allOf:
+        - $ref: '#/components/schemas/ChatRequest'
+        - type: object
+          properties:
+            context:
+              type: string
+              description: Caller-supplied context to ground the answer.
+    ChatResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: The generated answer to the query.
+        thread_id:
+          type: string
+          format: uuid
+          description: Identifier of the Thread; use it to ask follow-up questions.
+        question_answer_id:
+          type: string
+          format: uuid
+          description: Identifier of this question/answer; used when submitting feedback.
+        is_uncertain:
+          type: boolean
+          description: True when kapa.ai is uncertain about the answer.
+        relevant_sources:
+          type: array
+          description: Sources used to construct the answer.
+          items:
+            $ref: '#/components/schemas/RelevantSource'
+    RelevantSource:
+      type: object
+      properties:
+        source_url:
+          type: string
+          format: uri
+        title:
+          type: string
+        content:
+          type: string
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: End-user email for per-user analytics tracking.
+        unique_client_id:
+          type: string
+          description: Stable client identifier for the end user.
+    FeedbackRequest:
+      type: object
+      required:
+        - question_answer_id
+        - reaction
+      properties:
+        question_answer_id:
+          type: string
+          format: uuid
+        reaction:
+          type: string
+          enum:
+            - upvote
+            - downvote
+          description: The reaction on the answer.
+        comment:
+          type: string
+          description: Optional free-text feedback.
+    FeedbackResponse:
+      type: object
+      properties:
+        question_answer_id:
+          type: string
+          format: uuid
+        reaction:
+          type: string
+    RetrievalRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The retrieval query.
+        num_results:
+          type: integer
+          description: Maximum number of chunks to return.
+    RetrievalResponse:
+      type: object
+      properties:
+        relevant_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/RetrievedChunk'
+    RetrievedChunk:
+      type: object
+      properties:
+        content:
+          type: string
+        source_url:
+          type: string
+          format: uri
+        title:
+          type: string
+        score:
+          type: number
+          format: float
+          description: Relevance score in descending order.
+    Thread:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        project_id:
+          type: string
+          format: uuid
+        messages:
+          type: array
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+              content:
+                type: string
+        created_at:
+          type: string
+          format: date-time
+    ThreadList:
+      type: object
+      properties:
+        count:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Thread'
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+    IntegrationList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              name:
+                type: string
+              type:
+                type: string
+    SourceList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              type:
+                type: string
+              url:
+                type: string
+                format: uri
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string

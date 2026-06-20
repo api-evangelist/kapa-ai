@@ -1,0 +1,233 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "kapa.ai Query API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "X-API-KEY",
+        "value": "{{apiKey}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Chat", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Chat", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kapa.ai/query/v1/projects/{project_id}/chat",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"<INTEGRATION_ID>\"\n}"
+            }
+          },
+          "docs": "Ask the project's kapa.ai instance a question. Creates a new Thread and returns the answer with relevant sources."
+        },
+        {
+          "info": { "name": "Chat streamed", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kapa.ai/query/v1/projects/{project_id}/chat/stream",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"<INTEGRATION_ID>\"\n}"
+            }
+          },
+          "docs": "Streamed chat. Answer chunks are delimited by the Unicode record separator character (U+241E)."
+        },
+        {
+          "info": { "name": "Custom chat", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kapa.ai/query/v1/projects/{project_id}/chat/custom",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"<INTEGRATION_ID>\",\n  \"context\": \"Additional grounding context.\"\n}"
+            }
+          },
+          "docs": "Chat using caller-supplied context."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Threads", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Chat in thread", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kapa.ai/query/v1/threads/{thread_id}/chat",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"Can you elaborate?\",\n  \"integration_id\": \"<INTEGRATION_ID>\"\n}"
+            }
+          },
+          "docs": "Ask a follow-up question within an existing Thread."
+        },
+        {
+          "info": { "name": "Chat in thread streamed", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kapa.ai/query/v1/threads/{thread_id}/chat/stream",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"Can you elaborate?\",\n  \"integration_id\": \"<INTEGRATION_ID>\"\n}"
+            }
+          },
+          "docs": "Streamed follow-up question within an existing Thread."
+        },
+        {
+          "info": { "name": "Retrieve a thread", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/threads/{thread_id}"
+          },
+          "docs": "Retrieve a single Thread object and its messages."
+        },
+        {
+          "info": { "name": "List threads", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/projects/{project_id}/threads"
+          },
+          "docs": "List Thread objects for a project."
+        },
+        {
+          "info": { "name": "Upsert feedback", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kapa.ai/query/v1/feedback",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"question_answer_id\": \"<QUESTION_ANSWER_ID>\",\n  \"reaction\": \"upvote\",\n  \"comment\": \"Helpful answer.\"\n}"
+            }
+          },
+          "docs": "Submit or update feedback on a question/answer using its question_answer_id."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Retrieval", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieval", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kapa.ai/query/v1/projects/{project_id}/retrieval",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"How do I configure authentication?\",\n  \"num_results\": 5\n}"
+            }
+          },
+          "docs": "Semantic retrieval against ingested knowledge sources without LLM generation."
+        },
+        {
+          "info": { "name": "Search (deprecated)", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/projects/{project_id}/search?query=getting started"
+          },
+          "docs": "Deprecated keyword search across knowledge sources. Use Retrieval instead."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Projects", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Retrieve a project", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/org/v1/projects/{project_id}"
+          },
+          "docs": "Retrieve a single project by id."
+        },
+        {
+          "info": { "name": "List all integrations", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/projects/{project_id}/integrations"
+          },
+          "docs": "List the integrations configured for a project."
+        },
+        {
+          "info": { "name": "List all sources", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/ingestion/v1/projects/{project_id}/sources"
+          },
+          "docs": "List the ingested knowledge sources for a project."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Analytics", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Activity data", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/projects/{project_id}/activity"
+          },
+          "docs": "Retrieve activity/usage analytics for a project."
+        },
+        {
+          "info": { "name": "List question answers", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/projects/{project_id}/question-answers"
+          },
+          "docs": "List question/answer records for a project."
+        },
+        {
+          "info": { "name": "List end users", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/projects/{project_id}/end-users"
+          },
+          "docs": "List end users that have interacted with the project."
+        },
+        {
+          "info": { "name": "List coverage gaps periods", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/projects/{project_id}/coverage-gaps/periods"
+          },
+          "docs": "List coverage-gap analysis periods for a project."
+        },
+        {
+          "info": { "name": "Retrieve coverage gaps period", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/coverage-gaps/periods/{period_id}"
+          },
+          "docs": "Retrieve a single coverage-gap period by id."
+        },
+        {
+          "info": { "name": "List top questions periods", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/projects/{project_id}/top-questions/periods"
+          },
+          "docs": "List top-question analysis periods for a project."
+        },
+        {
+          "info": { "name": "Retrieve top questions period", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/top-questions/periods/{period_id}"
+          },
+          "docs": "Retrieve a single top-question period by id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
