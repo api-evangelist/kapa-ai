@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/kapa-ai-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-API-KEY
+  description: kapa.ai project API key, created in the API Keys tab of the platform.
+  sources:
+  - openapi/kapa-ai-openapi.yml
