@@ -133,6 +133,8 @@ apis:
     question/answers, end users, coverage-gap periods, and top-question periods -
     to understand how the AI assistant is performing against the knowledge base.
 common:
+- type: AgenticAccess
+  url: agentic-access/kapa-ai-agentic-access.yml
 - type: DomainSecurity
   url: security/kapa-ai-domain-security.yml
 - type: Authentication
