@@ -1,0 +1,128 @@
+openapi: 3.0.1
+info:
+  title: kapa.ai Query Analytics Retrieval API
+  description: REST API for the kapa.ai answer platform. Ask a project's kapa.ai instance questions and receive retrieval-augmented answers with sources, run threaded multi-turn conversations (standard and streamed), perform semantic retrieval and keyword search against ingested knowledge sources, submit feedback, and read project, integration, source, and analytics data. All requests are authenticated with an X-API-KEY header.
+  termsOfService: https://www.kapa.ai/content/terms-of-service
+  contact:
+    name: kapa.ai Support
+    url: https://docs.kapa.ai
+  version: '1.0'
+servers:
+- url: https://api.kapa.ai
+  description: kapa.ai production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Retrieval
+  description: Semantic retrieval and keyword search.
+paths:
+  /query/v1/projects/{project_id}/retrieval:
+    post:
+      operationId: retrieval
+      tags:
+      - Retrieval
+      summary: Retrieval
+      description: Semantic retrieval against the project's ingested knowledge sources without LLM generation. Returns the most relevant chunks in descending order of relevance, for use as context for external LLMs and agents.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrievalRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrievalResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/search:
+    get:
+      operationId: search
+      tags:
+      - Retrieval
+      summary: Search (deprecated)
+      description: Deprecated fast keyword-based search across the project's knowledge sources. Use the retrieval endpoint for semantic search.
+      deprecated: true
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      - name: query
+        in: query
+        required: true
+        schema:
+          type: string
+        description: The search query string.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrievalResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: The kapa.ai project (instance) identifier.
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    RetrievedChunk:
+      type: object
+      properties:
+        content:
+          type: string
+        source_url:
+          type: string
+          format: uri
+        title:
+          type: string
+        score:
+          type: number
+          format: float
+          description: Relevance score in descending order.
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+    RetrievalResponse:
+      type: object
+      properties:
+        relevant_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/RetrievedChunk'
+    RetrievalRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The retrieval query.
+        num_results:
+          type: integer
+          description: Maximum number of chunks to return.
+  responses:
+    Unauthorized:
+      description: Missing or invalid X-API-KEY.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: kapa.ai project API key, created in the API Keys tab of the platform.

@@ -1,0 +1,199 @@
+openapi: 3.0.1
+info:
+  title: kapa.ai Query Analytics API
+  description: REST API for the kapa.ai answer platform. Ask a project's kapa.ai instance questions and receive retrieval-augmented answers with sources, run threaded multi-turn conversations (standard and streamed), perform semantic retrieval and keyword search against ingested knowledge sources, submit feedback, and read project, integration, source, and analytics data. All requests are authenticated with an X-API-KEY header.
+  termsOfService: https://www.kapa.ai/content/terms-of-service
+  contact:
+    name: kapa.ai Support
+    url: https://docs.kapa.ai
+  version: '1.0'
+servers:
+- url: https://api.kapa.ai
+  description: kapa.ai production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Analytics
+  description: Activity, coverage gaps, and top questions.
+paths:
+  /query/v1/projects/{project_id}/activity:
+    get:
+      operationId: getActivity
+      tags:
+      - Analytics
+      summary: Activity data
+      description: Retrieve activity/usage analytics for a project.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/question-answers:
+    get:
+      operationId: listQuestionAnswers
+      tags:
+      - Analytics
+      summary: List question answers
+      description: List question/answer records for a project.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageNumber'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/end-users:
+    get:
+      operationId: listEndUsers
+      tags:
+      - Analytics
+      summary: List end users
+      description: List end users that have interacted with the project.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/coverage-gaps/periods:
+    get:
+      operationId: listCoverageGapsPeriods
+      tags:
+      - Analytics
+      summary: List coverage gaps periods
+      description: List coverage-gap analysis periods for a project.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/coverage-gaps/periods/{period_id}:
+    get:
+      operationId: getCoverageGapsPeriod
+      tags:
+      - Analytics
+      summary: Retrieve coverage gaps period
+      description: Retrieve a single coverage-gap period by id.
+      parameters:
+      - name: period_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/top-questions/periods:
+    get:
+      operationId: listTopQuestionsPeriods
+      tags:
+      - Analytics
+      summary: List top questions periods
+      description: List top-question analysis periods for a project.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/top-questions/periods/{period_id}:
+    get:
+      operationId: getTopQuestionsPeriod
+      tags:
+      - Analytics
+      summary: Retrieve top questions period
+      description: Retrieve a single top-question period by id.
+      parameters:
+      - name: period_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: The kapa.ai project (instance) identifier.
+      schema:
+        type: string
+        format: uuid
+    PageNumber:
+      name: page_number
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+    PageSize:
+      name: page_size
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
+  schemas:
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid X-API-KEY.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: kapa.ai project API key, created in the API Keys tab of the platform.

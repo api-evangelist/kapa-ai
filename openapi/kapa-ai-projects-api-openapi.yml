@@ -1,0 +1,140 @@
+openapi: 3.0.1
+info:
+  title: kapa.ai Query Analytics Projects API
+  description: REST API for the kapa.ai answer platform. Ask a project's kapa.ai instance questions and receive retrieval-augmented answers with sources, run threaded multi-turn conversations (standard and streamed), perform semantic retrieval and keyword search against ingested knowledge sources, submit feedback, and read project, integration, source, and analytics data. All requests are authenticated with an X-API-KEY header.
+  termsOfService: https://www.kapa.ai/content/terms-of-service
+  contact:
+    name: kapa.ai Support
+    url: https://docs.kapa.ai
+  version: '1.0'
+servers:
+- url: https://api.kapa.ai
+  description: kapa.ai production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Projects
+  description: Projects, integrations, and sources.
+paths:
+  /org/v1/projects/{project_id}:
+    get:
+      operationId: getProject
+      tags:
+      - Projects
+      summary: Retrieve a project
+      description: Retrieve a single project by id.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/integrations:
+    get:
+      operationId: listIntegrations
+      tags:
+      - Projects
+      summary: List all integrations
+      description: List the integrations configured for a project.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /ingestion/v1/projects/{project_id}/sources:
+    get:
+      operationId: listSources
+      tags:
+      - Projects
+      summary: List all sources
+      description: List the ingested knowledge sources for a project.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    SourceList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              type:
+                type: string
+              url:
+                type: string
+                format: uri
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+    IntegrationList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              name:
+                type: string
+              type:
+                type: string
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+  parameters:
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: The kapa.ai project (instance) identifier.
+      schema:
+        type: string
+        format: uuid
+  responses:
+    Unauthorized:
+      description: Missing or invalid X-API-KEY.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: kapa.ai project API key, created in the API Keys tab of the platform.

@@ -1,0 +1,86 @@
+openapi: 3.0.1
+info:
+  title: kapa.ai Query Analytics Feedback API
+  description: REST API for the kapa.ai answer platform. Ask a project's kapa.ai instance questions and receive retrieval-augmented answers with sources, run threaded multi-turn conversations (standard and streamed), perform semantic retrieval and keyword search against ingested knowledge sources, submit feedback, and read project, integration, source, and analytics data. All requests are authenticated with an X-API-KEY header.
+  termsOfService: https://www.kapa.ai/content/terms-of-service
+  contact:
+    name: kapa.ai Support
+    url: https://docs.kapa.ai
+  version: '1.0'
+servers:
+- url: https://api.kapa.ai
+  description: kapa.ai production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Feedback
+  description: Submit reactions on answers.
+paths:
+  /query/v1/feedback:
+    post:
+      operationId: upsertFeedback
+      tags:
+      - Feedback
+      summary: Upsert feedback
+      description: Submit or update feedback (a reaction and optional comment) on a specific question/answer using its question_answer_id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeedbackRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FeedbackResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    FeedbackRequest:
+      type: object
+      required:
+      - question_answer_id
+      - reaction
+      properties:
+        question_answer_id:
+          type: string
+          format: uuid
+        reaction:
+          type: string
+          enum:
+          - upvote
+          - downvote
+          description: The reaction on the answer.
+        comment:
+          type: string
+          description: Optional free-text feedback.
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+    FeedbackResponse:
+      type: object
+      properties:
+        question_answer_id:
+          type: string
+          format: uuid
+        reaction:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid X-API-KEY.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: kapa.ai project API key, created in the API Keys tab of the platform.

@@ -1,0 +1,183 @@
+openapi: 3.0.1
+info:
+  title: kapa.ai Query Analytics Chat API
+  description: REST API for the kapa.ai answer platform. Ask a project's kapa.ai instance questions and receive retrieval-augmented answers with sources, run threaded multi-turn conversations (standard and streamed), perform semantic retrieval and keyword search against ingested knowledge sources, submit feedback, and read project, integration, source, and analytics data. All requests are authenticated with an X-API-KEY header.
+  termsOfService: https://www.kapa.ai/content/terms-of-service
+  contact:
+    name: kapa.ai Support
+    url: https://docs.kapa.ai
+  version: '1.0'
+servers:
+- url: https://api.kapa.ai
+  description: kapa.ai production API
+security:
+- ApiKeyAuth: []
+tags:
+- name: Chat
+  description: Ask questions and create threads.
+paths:
+  /query/v1/projects/{project_id}/chat:
+    post:
+      operationId: chat
+      tags:
+      - Chat
+      summary: Chat
+      description: Ask the project's kapa.ai instance a question. Creates a new Thread and returns the retrieval-augmented answer with relevant sources.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/chat/stream:
+    post:
+      operationId: chatStream
+      tags:
+      - Chat
+      summary: Chat streamed
+      description: Streamed variant of chat. The answer is delivered incrementally as chunks delimited by the Unicode record separator character (U+241E), so partial answers can be rendered as they are generated.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: A stream of answer chunks delimited by U+241E.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /query/v1/projects/{project_id}/chat/custom:
+    post:
+      operationId: chatCustom
+      tags:
+      - Chat
+      summary: Custom chat
+      description: Chat using caller-supplied context instead of (or in addition to) the project's ingested knowledge sources.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomChatRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: The kapa.ai project (instance) identifier.
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: End-user email for per-user analytics tracking.
+        unique_client_id:
+          type: string
+          description: Stable client identifier for the end user.
+    ChatResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: The generated answer to the query.
+        thread_id:
+          type: string
+          format: uuid
+          description: Identifier of the Thread; use it to ask follow-up questions.
+        question_answer_id:
+          type: string
+          format: uuid
+          description: Identifier of this question/answer; used when submitting feedback.
+        is_uncertain:
+          type: boolean
+          description: True when kapa.ai is uncertain about the answer.
+        relevant_sources:
+          type: array
+          description: Sources used to construct the answer.
+          items:
+            $ref: '#/components/schemas/RelevantSource'
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+    RelevantSource:
+      type: object
+      properties:
+        source_url:
+          type: string
+          format: uri
+        title:
+          type: string
+        content:
+          type: string
+    ChatRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The user's question.
+          example: How do I get started?
+        integration_id:
+          type: string
+          description: Integration identifier used to attribute usage analytics; calls without it appear as the "Unknown" integration.
+        user:
+          $ref: '#/components/schemas/User'
+    CustomChatRequest:
+      allOf:
+      - $ref: '#/components/schemas/ChatRequest'
+      - type: object
+        properties:
+          context:
+            type: string
+            description: Caller-supplied context to ground the answer.
+  responses:
+    Unauthorized:
+      description: Missing or invalid X-API-KEY.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: kapa.ai project API key, created in the API Keys tab of the platform.
