@@ -8,7 +8,20 @@ description: kapa.ai is an AI assistant and answer platform that turns technical
   conversations with streaming answers, perform semantic retrieval and search, and
   pull analytics over projects and threads via a REST interface authenticated with
   an X-API-KEY header.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/kapa-ai.png
 tags:
 - AI
 - Answer Engine
@@ -19,119 +32,174 @@ created: '2026-06-20'
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-- aid: kapa-ai:kapa-ai-query-chat-api
-  name: kapa.ai Query Chat API
-  tags:
-  - Chat
-  - Query
-  - RAG
-  - Streaming
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
-  baseURL: https://api.kapa.ai/query/v1
-  properties:
-  - url: https://docs.kapa.ai/api/quickstart
-    type: Documentation
-  - url: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
-    type: APIReference
-  - url: openapi/kapa-ai-openapi.yml
-    type: OpenAPI
-  - url: collections/kapa-ai.postman_collection.json
-    type: PostmanCollection
-  - url: collections/kapa-ai.opencollection.json
-    type: OpenCollection
-  description: Ask a project's kapa.ai instance a question and receive a
-    retrieval-augmented answer with relevant sources. Each chat call creates a
-    new Thread; both standard and Server-Sent-Event style streamed variants are
-    available, plus a custom-chat endpoint for supplying your own context.
-- aid: kapa-ai:kapa-ai-threads-conversations-api
-  name: kapa.ai Threads Conversations API
-  tags:
-  - Threads
-  - Conversations
-  - Follow Up
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.kapa.ai/api/reference
-  baseURL: https://api.kapa.ai/query/v1
-  properties:
-  - url: https://docs.kapa.ai/analytics/conversations
-    type: Documentation
-  - url: https://docs.kapa.ai/api/reference
-    type: APIReference
-  - url: openapi/kapa-ai-openapi.yml
-    type: OpenAPI
-  - url: collections/kapa-ai.postman_collection.json
-    type: PostmanCollection
-  - url: collections/kapa-ai.opencollection.json
-    type: OpenCollection
-  description: List and retrieve Thread objects and continue a multi-turn
-    conversation by chatting in an existing thread, with standard and streamed
-    follow-up variants and a feedback endpoint for upserting reactions on a
-    question/answer.
-- aid: kapa-ai:kapa-ai-search-retrieval-api
-  name: kapa.ai Search and Retrieval API
-  tags:
-  - Search
-  - Retrieval
-  - Semantic
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.kapa.ai/api/reference/query-v-1-projects-retrieval
-  baseURL: https://api.kapa.ai/query/v1
-  properties:
-  - url: https://docs.kapa.ai/api/reference/query-v-1-projects-retrieval
-    type: Documentation
-  - url: openapi/kapa-ai-openapi.yml
-    type: OpenAPI
-  - url: collections/kapa-ai.postman_collection.json
-    type: PostmanCollection
-  - url: collections/kapa-ai.opencollection.json
-    type: OpenCollection
-  description: Semantic retrieval that returns the most relevant chunks from a
-    project's ingested knowledge sources without LLM generation, intended to
-    supply context to external LLMs and agents, alongside a deprecated keyword
-    search endpoint.
-- aid: kapa-ai:kapa-ai-projects-api
-  name: kapa.ai Projects API
-  tags:
-  - Projects
-  - Integrations
-  - Sources
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.kapa.ai/api/overview
-  baseURL: https://api.kapa.ai
-  properties:
-  - url: https://docs.kapa.ai/api/overview
-    type: Documentation
-  - url: openapi/kapa-ai-openapi.yml
-    type: OpenAPI
-  - url: collections/kapa-ai.postman_collection.json
-    type: PostmanCollection
-  - url: collections/kapa-ai.opencollection.json
-    type: OpenCollection
-  description: Retrieve a project and enumerate the integrations and ingested
-    sources configured for it, scoping every other Query API call to a
-    project_id.
 - aid: kapa-ai:kapa-ai-analytics-api
   name: kapa.ai Analytics API
+  description: Activity, coverage gaps, and top questions.
+  humanURL: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+  baseURL: https://api.kapa.ai/query/v1
   tags:
   - Analytics
-  - Coverage Gaps
-  - Top Questions
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.kapa.ai/api/reference
-  baseURL: https://api.kapa.ai/query/v1
   properties:
-  - url: https://docs.kapa.ai/api/reference
-    type: Documentation
-  - url: openapi/kapa-ai-openapi.yml
-    type: OpenAPI
-  - url: collections/kapa-ai.postman_collection.json
-    type: PostmanCollection
-  - url: collections/kapa-ai.opencollection.json
-    type: OpenCollection
-  description: Read usage and quality analytics for a project - activity,
-    question/answers, end users, coverage-gap periods, and top-question periods -
-    to understand how the AI assistant is performing against the knowledge base.
+  - type: OpenAPI
+    url: openapi/kapa-ai-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.kapa.ai/api/quickstart
+  - type: APIReference
+    url: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+  - type: PostmanCollection
+    url: collections/kapa-ai.postman_collection.json
+  - type: OpenCollection
+    url: collections/kapa-ai.opencollection.json
+  - type: Documentation
+    url: https://docs.kapa.ai/analytics/conversations
+  - type: APIReference
+    url: https://docs.kapa.ai/api/reference
+  - type: Documentation
+    url: https://docs.kapa.ai/api/reference/query-v-1-projects-retrieval
+  - type: Documentation
+    url: https://docs.kapa.ai/api/overview
+  - type: Documentation
+    url: https://docs.kapa.ai/api/reference
+- aid: kapa-ai:kapa-ai-chat-api
+  name: kapa.ai Chat API
+  description: Ask questions and create threads.
+  humanURL: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+  baseURL: https://api.kapa.ai/query/v1
+  tags:
+  - Chat
+  properties:
+  - type: OpenAPI
+    url: openapi/kapa-ai-chat-api-openapi.yml
+  - type: Documentation
+    url: https://docs.kapa.ai/api/quickstart
+  - type: APIReference
+    url: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+  - type: PostmanCollection
+    url: collections/kapa-ai.postman_collection.json
+  - type: OpenCollection
+    url: collections/kapa-ai.opencollection.json
+  - type: Documentation
+    url: https://docs.kapa.ai/analytics/conversations
+  - type: APIReference
+    url: https://docs.kapa.ai/api/reference
+  - type: Documentation
+    url: https://docs.kapa.ai/api/reference/query-v-1-projects-retrieval
+  - type: Documentation
+    url: https://docs.kapa.ai/api/overview
+  - type: Documentation
+    url: https://docs.kapa.ai/api/reference
+- aid: kapa-ai:kapa-ai-feedback-api
+  name: kapa.ai Feedback API
+  description: Submit reactions on answers.
+  humanURL: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+  baseURL: https://api.kapa.ai/query/v1
+  tags:
+  - Feedback
+  properties:
+  - type: OpenAPI
+    url: openapi/kapa-ai-feedback-api-openapi.yml
+  - type: Documentation
+    url: https://docs.kapa.ai/api/quickstart
+  - type: APIReference
+    url: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+  - type: PostmanCollection
+    url: collections/kapa-ai.postman_collection.json
+  - type: OpenCollection
+    url: collections/kapa-ai.opencollection.json
+  - type: Documentation
+    url: https://docs.kapa.ai/analytics/conversations
+  - type: APIReference
+    url: https://docs.kapa.ai/api/reference
+  - type: Documentation
+    url: https://docs.kapa.ai/api/reference/query-v-1-projects-retrieval
+  - type: Documentation
+    url: https://docs.kapa.ai/api/overview
+  - type: Documentation
+    url: https://docs.kapa.ai/api/reference
+- aid: kapa-ai:kapa-ai-projects-api
+  name: kapa.ai Projects API
+  description: Projects, integrations, and sources.
+  humanURL: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+  baseURL: https://api.kapa.ai/query/v1
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/kapa-ai-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.kapa.ai/api/quickstart
+  - type: APIReference
+    url: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+  - type: PostmanCollection
+    url: collections/kapa-ai.postman_collection.json
+  - type: OpenCollection
+    url: collections/kapa-ai.opencollection.json
+  - type: Documentation
+    url: https://docs.kapa.ai/analytics/conversations
+  - type: APIReference
+    url: https://docs.kapa.ai/api/reference
+  - type: Documentation
+    url: https://docs.kapa.ai/api/reference/query-v-1-projects-retrieval
+  - type: Documentation
+    url: https://docs.kapa.ai/api/overview
+  - type: Documentation
+    url: https://docs.kapa.ai/api/reference
+- aid: kapa-ai:kapa-ai-retrieval-api
+  name: kapa.ai Retrieval API
+  description: Semantic retrieval and keyword search.
+  humanURL: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+  baseURL: https://api.kapa.ai/query/v1
+  tags:
+  - Retrieval
+  properties:
+  - type: OpenAPI
+    url: openapi/kapa-ai-retrieval-api-openapi.yml
+  - type: Documentation
+    url: https://docs.kapa.ai/api/quickstart
+  - type: APIReference
+    url: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+  - type: PostmanCollection
+    url: collections/kapa-ai.postman_collection.json
+  - type: OpenCollection
+    url: collections/kapa-ai.opencollection.json
+  - type: Documentation
+    url: https://docs.kapa.ai/analytics/conversations
+  - type: APIReference
+    url: https://docs.kapa.ai/api/reference
+  - type: Documentation
+    url: https://docs.kapa.ai/api/reference/query-v-1-projects-retrieval
+  - type: Documentation
+    url: https://docs.kapa.ai/api/overview
+  - type: Documentation
+    url: https://docs.kapa.ai/api/reference
+- aid: kapa-ai:kapa-ai-threads-api
+  name: kapa.ai Threads API
+  description: List, retrieve, and continue conversations.
+  humanURL: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+  baseURL: https://api.kapa.ai/query/v1
+  tags:
+  - Threads
+  properties:
+  - type: OpenAPI
+    url: openapi/kapa-ai-threads-api-openapi.yml
+  - type: Documentation
+    url: https://docs.kapa.ai/api/quickstart
+  - type: APIReference
+    url: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
+  - type: PostmanCollection
+    url: collections/kapa-ai.postman_collection.json
+  - type: OpenCollection
+    url: collections/kapa-ai.opencollection.json
+  - type: Documentation
+    url: https://docs.kapa.ai/analytics/conversations
+  - type: APIReference
+    url: https://docs.kapa.ai/api/reference
+  - type: Documentation
+    url: https://docs.kapa.ai/api/reference/query-v-1-projects-retrieval
+  - type: Documentation
+    url: https://docs.kapa.ai/api/overview
+  - type: Documentation
+    url: https://docs.kapa.ai/api/reference
 common:
 - type: AgenticAccess
   url: agentic-access/kapa-ai-agentic-access.yml
