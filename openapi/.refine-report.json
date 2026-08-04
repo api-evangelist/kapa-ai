@@ -1,0 +1,24 @@
+{
+  "provider": "kapa-ai",
+  "sources": [
+    "kapa-ai-analytics-api-openapi.yml",
+    "kapa-ai-chat-api-openapi.yml",
+    "kapa-ai-feedback-api-openapi.yml",
+    "kapa-ai-projects-api-openapi.yml",
+    "kapa-ai-retrieval-api-openapi.yml",
+    "kapa-ai-threads-api-openapi.yml"
+  ],
+  "outputs": [
+    "kapa-ai-analytics-api-openapi.yml",
+    "kapa-ai-chat-api-openapi.yml",
+    "kapa-ai-feedback-api-openapi.yml",
+    "kapa-ai-projects-api-openapi.yml",
+    "kapa-ai-retrieval-api-openapi.yml",
+    "kapa-ai-threads-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
