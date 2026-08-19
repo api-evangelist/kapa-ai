@@ -1,0 +1,409 @@
+{
+  "item": [
+    {
+      "id": "e017437d-71e8-49e6-8057-468161fc1635",
+      "name": "Retrieval",
+      "description": {
+        "content": "Semantic retrieval and keyword search.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "64ebd0c7-37fa-445d-82a2-94cde009716e",
+          "name": "Retrieval",
+          "request": {
+            "name": "Retrieval",
+            "description": {
+              "content": "Semantic retrieval against the project's ingested knowledge sources without LLM generation. Returns the most relevant chunks in descending order of relevance, for use as context for external LLMs and agents.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "query",
+                "v1",
+                "projects",
+                ":project_id",
+                "retrieval"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id",
+                  "description": "(Required) The kapa.ai project (instance) identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"num_results\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eb8f68ae-9caa-4803-be9d-f6dc7d3c11b6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "projects",
+                    ":project_id",
+                    "retrieval"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id",
+                      "description": "(Required) The kapa.ai project (instance) identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"num_results\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"relevant_sources\": [\n    {\n      \"content\": \"string\",\n      \"source_url\": \"https://wPODIpsvHOMCvFZT.hkeqOPGrhD6Gs0WfwUfcmI-tFYXtfy5J\",\n      \"title\": \"string\",\n      \"score\": 4194.271104891209\n    },\n    {\n      \"content\": \"string\",\n      \"source_url\": \"https://wnzVKFKIfVOjGwwbvNvWdmt.lhGXj-C7OMQgnxnx2JwGrKEkCIulaHiEOfOaihF3oHZ1LeK\",\n      \"title\": \"string\",\n      \"score\": 9026.328658115268\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88b09a1c-6686-4e59-840a-7c543e35a52e",
+              "name": "Missing or invalid X-API-KEY.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "projects",
+                    ":project_id",
+                    "retrieval"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id",
+                      "description": "(Required) The kapa.ai project (instance) identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"num_results\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9a75c74-bac2-49bb-945f-a2633a8bc1f5",
+          "name": "Search (deprecated)",
+          "request": {
+            "name": "Search (deprecated)",
+            "description": {
+              "content": "Deprecated fast keyword-based search across the project's knowledge sources. Use the retrieval endpoint for semantic search.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "query",
+                "v1",
+                "projects",
+                ":project_id",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) The search query string."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id",
+                  "description": "(Required) The kapa.ai project (instance) identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0df2b95-7403-4794-b638-1ba51667af9d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "projects",
+                    ":project_id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id",
+                      "description": "(Required) The kapa.ai project (instance) identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"relevant_sources\": [\n    {\n      \"content\": \"string\",\n      \"source_url\": \"https://JqcoVWyPXf.ldtaCHPKY,Yb3h9WEkIalbxOCn+DEdAz,UVBP,HpXfOKXpqJSWim1p\",\n      \"title\": \"string\",\n      \"score\": 9688.720084049917\n    },\n    {\n      \"content\": \"string\",\n      \"source_url\": \"https://gdGlpbhRfpxVDglYwEAQCRmeObcQfuJ.xfirBqyfWYh3r5dwKLOM\",\n      \"title\": \"string\",\n      \"score\": 7380.646913521883\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9fdab47-0142-4c5e-bcd2-25ccfc64b5ed",
+              "name": "Missing or invalid X-API-KEY.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "projects",
+                    ":project_id",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id",
+                      "description": "(Required) The kapa.ai project (instance) identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kapa.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8f078be9-50f8-4785-abf0-adbb0629f84a",
+    "name": "kapa.ai Query Analytics Retrieval API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the kapa.ai answer platform. Ask a project's kapa.ai instance questions and receive retrieval-augmented answers with sources, run threaded multi-turn conversations (standard and streamed), perform semantic retrieval and keyword search against ingested knowledge sources, submit feedback, and read project, integration, source, and analytics data. All requests are authenticated with an X-API-KEY header.\n\nContact Support:\n Name: kapa.ai Support",
+      "type": "text/plain"
+    }
+  }
+}

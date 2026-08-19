@@ -1,0 +1,613 @@
+{
+  "item": [
+    {
+      "id": "197eb7b2-3da7-44fa-851d-d0fe883d574f",
+      "name": "Chat",
+      "description": {
+        "content": "Ask questions and create threads.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ff37a824-caf0-4ba4-8e8e-150b07239115",
+          "name": "Chat",
+          "request": {
+            "name": "Chat",
+            "description": {
+              "content": "Ask the project's kapa.ai instance a question. Creates a new Thread and returns the retrieval-augmented answer with relevant sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "query",
+                "v1",
+                "projects",
+                ":project_id",
+                "chat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id",
+                  "description": "(Required) The kapa.ai project (instance) identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2f824286-f190-479a-aec2-242c9cd57cfc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "projects",
+                    ":project_id",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id",
+                      "description": "(Required) The kapa.ai project (instance) identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"answer\": \"string\",\n  \"thread_id\": \"3c781f85-e7d7-75fa-d94d-86318d1733ae\",\n  \"question_answer_id\": \"048d92cb-e100-cb84-ad08-ec2275be4f5b\",\n  \"is_uncertain\": false,\n  \"relevant_sources\": [\n    {\n      \"source_url\": \"http://CyYmEYTpfHlspYgctfgdjOTB.fguA6,BuJZOb,byuq.WBsZz3.UBFoglRxhhj0u466SvcLMOPsqRt76\",\n      \"title\": \"string\",\n      \"content\": \"string\"\n    },\n    {\n      \"source_url\": \"https://EXfvBFdMxAhRPKgbS.tcPMXfuBWOHNmV,yOXWWwclxefKQArttLye4xmcDspV68lC7YWG-2\",\n      \"title\": \"string\",\n      \"content\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b9b0280-4e9c-4795-b44b-88ee256a24e4",
+              "name": "Missing or invalid X-API-KEY.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "projects",
+                    ":project_id",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id",
+                      "description": "(Required) The kapa.ai project (instance) identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2825de30-4214-4764-b725-78de5e639621",
+          "name": "Chat streamed",
+          "request": {
+            "name": "Chat streamed",
+            "description": {
+              "content": "Streamed variant of chat. The answer is delivered incrementally as chunks delimited by the Unicode record separator character (U+241E), so partial answers can be rendered as they are generated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "query",
+                "v1",
+                "projects",
+                ":project_id",
+                "chat",
+                "stream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id",
+                  "description": "(Required) The kapa.ai project (instance) identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "25edb5ea-1bc6-4d25-9e56-269304d2fc07",
+              "name": "A stream of answer chunks delimited by U+241E.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "projects",
+                    ":project_id",
+                    "chat",
+                    "stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id",
+                      "description": "(Required) The kapa.ai project (instance) identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2c9ffe5e-6ec9-42d4-b3b1-56a398ca4671",
+              "name": "Missing or invalid X-API-KEY.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "projects",
+                    ":project_id",
+                    "chat",
+                    "stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id",
+                      "description": "(Required) The kapa.ai project (instance) identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12627b5f-0957-447f-a13a-e6f524ebfcb1",
+          "name": "Custom chat",
+          "request": {
+            "name": "Custom chat",
+            "description": {
+              "content": "Chat using caller-supplied context instead of (or in addition to) the project's ingested knowledge sources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "query",
+                "v1",
+                "projects",
+                ":project_id",
+                "chat",
+                "custom"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id",
+                  "description": "(Required) The kapa.ai project (instance) identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  },\n  \"context\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3bc4bb64-abda-489d-bef2-f5ba2fd59a60",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "projects",
+                    ":project_id",
+                    "chat",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id",
+                      "description": "(Required) The kapa.ai project (instance) identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  },\n  \"context\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"answer\": \"string\",\n  \"thread_id\": \"d967d261-6b8f-1560-ff8a-a25eb70bd441\",\n  \"question_answer_id\": \"41681d68-d020-9150-a4f6-28b3054454f5\",\n  \"is_uncertain\": false,\n  \"relevant_sources\": [\n    {\n      \"source_url\": \"https://NLnMBIopaa.dmyWwOgFfwOyfn3viGYEFYmnmIYSy0whqfx0jDawOeEH,wIGe4WDPVeAptj,gF2-4w\",\n      \"title\": \"string\",\n      \"content\": \"string\"\n    },\n    {\n      \"source_url\": \"http://nLBexgulgSFbtdCxQfseYvOex.hqefU0XBDDbeCs\",\n      \"title\": \"string\",\n      \"content\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d504e63-b55a-4b34-9023-e920c24e48a6",
+              "name": "Missing or invalid X-API-KEY.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "projects",
+                    ":project_id",
+                    "chat",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id",
+                      "description": "(Required) The kapa.ai project (instance) identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  },\n  \"context\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kapa.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "018d22b7-db93-400b-a474-b4719f7c0637",
+    "name": "kapa.ai Query Analytics Chat API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the kapa.ai answer platform. Ask a project's kapa.ai instance questions and receive retrieval-augmented answers with sources, run threaded multi-turn conversations (standard and streamed), perform semantic retrieval and keyword search against ingested knowledge sources, submit feedback, and read project, integration, source, and analytics data. All requests are authenticated with an X-API-KEY header.\n\nContact Support:\n Name: kapa.ai Support",
+      "type": "text/plain"
+    }
+  }
+}

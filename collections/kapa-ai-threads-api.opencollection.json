@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "kapa.ai Query Analytics Threads API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Threads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Chat in thread",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kapa.ai/query/v1/threads/:thread_id/chat",
+            "params": [
+              {
+                "name": "thread_id",
+                "value": "",
+                "type": "path",
+                "description": "The Thread identifier returned by a chat call."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Ask a follow-up question within an existing Thread, preserving the conversation context."
+        },
+        {
+          "info": {
+            "name": "Chat in thread streamed",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kapa.ai/query/v1/threads/:thread_id/chat/stream",
+            "params": [
+              {
+                "name": "thread_id",
+                "value": "",
+                "type": "path",
+                "description": "The Thread identifier returned by a chat call."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Streamed follow-up question within an existing Thread. Chunks are delimited by the Unicode record separator character (U+241E)."
+        },
+        {
+          "info": {
+            "name": "Retrieve a thread",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/threads/:thread_id",
+            "params": [
+              {
+                "name": "thread_id",
+                "value": "",
+                "type": "path",
+                "description": "The Thread identifier returned by a chat call."
+              }
+            ]
+          },
+          "docs": "Retrieve a single Thread object and its messages."
+        },
+        {
+          "info": {
+            "name": "List threads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/projects/:project_id/threads",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The kapa.ai project (instance) identifier."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_number",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Thread objects for a project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,764 @@
+{
+  "item": [
+    {
+      "id": "4b05b722-78ee-4019-b9c4-885d8f305368",
+      "name": "Threads",
+      "description": {
+        "content": "List, retrieve, and continue conversations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8cf71847-a7ea-402f-a01b-78e7e6f82f3d",
+          "name": "Chat in thread",
+          "request": {
+            "name": "Chat in thread",
+            "description": {
+              "content": "Ask a follow-up question within an existing Thread, preserving the conversation context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "query",
+                "v1",
+                "threads",
+                ":thread_id",
+                "chat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "thread_id",
+                  "description": "(Required) The Thread identifier returned by a chat call."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "41c8ec4c-6041-4f7a-91f3-d256658bee36",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "threads",
+                    ":thread_id",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "thread_id",
+                      "description": "(Required) The Thread identifier returned by a chat call."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"answer\": \"string\",\n  \"thread_id\": \"4276a21a-ce73-6f8b-c61e-4a119f936fd0\",\n  \"question_answer_id\": \"f3bb5e15-d29a-2970-2aa3-36ffce629f08\",\n  \"is_uncertain\": false,\n  \"relevant_sources\": [\n    {\n      \"source_url\": \"http://CcygYYkRiWSFnFSYIhxwb.xlwewUD8tt38v0\",\n      \"title\": \"string\",\n      \"content\": \"string\"\n    },\n    {\n      \"source_url\": \"http://EXkSlCdiKsqkaeCRcibNuojwVQgn.dgakI.+,NprrTbfPxWPwlgut3TYNkc5icBieh5U++OAFbrNeFyH9I\",\n      \"title\": \"string\",\n      \"content\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0635ab8-d64e-4eec-bff1-54cd66841f0f",
+              "name": "Missing or invalid X-API-KEY.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "threads",
+                    ":thread_id",
+                    "chat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "thread_id",
+                      "description": "(Required) The Thread identifier returned by a chat call."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "010ca066-8b66-457e-b069-821727e43c4f",
+          "name": "Chat in thread streamed",
+          "request": {
+            "name": "Chat in thread streamed",
+            "description": {
+              "content": "Streamed follow-up question within an existing Thread. Chunks are delimited by the Unicode record separator character (U+241E).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "query",
+                "v1",
+                "threads",
+                ":thread_id",
+                "chat",
+                "stream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "thread_id",
+                  "description": "(Required) The Thread identifier returned by a chat call."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "890dda77-cbc1-4bdc-b31d-076dc617b212",
+              "name": "A stream of answer chunks delimited by U+241E.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "threads",
+                    ":thread_id",
+                    "chat",
+                    "stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "thread_id",
+                      "description": "(Required) The Thread identifier returned by a chat call."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2fece1d2-6f3b-49d8-88d6-05eb6f6e6795",
+              "name": "Missing or invalid X-API-KEY.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "threads",
+                    ":thread_id",
+                    "chat",
+                    "stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "thread_id",
+                      "description": "(Required) The Thread identifier returned by a chat call."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"How do I get started?\",\n  \"integration_id\": \"<string>\",\n  \"user\": {\n    \"email\": \"<email>\",\n    \"unique_client_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0cb81324-924f-4588-acc5-5d5200e054bd",
+          "name": "Retrieve a thread",
+          "request": {
+            "name": "Retrieve a thread",
+            "description": {
+              "content": "Retrieve a single Thread object and its messages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "query",
+                "v1",
+                "threads",
+                ":thread_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "thread_id",
+                  "description": "(Required) The Thread identifier returned by a chat call."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fc26537-a029-41dc-8791-e027f307fdc5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "threads",
+                    ":thread_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "thread_id",
+                      "description": "(Required) The Thread identifier returned by a chat call."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"057a74f6-4c5f-f5bd-74da-fde3b8a8008b\",\n  \"project_id\": \"8afc5bda-d1f5-4693-f942-75b6fb075a5a\",\n  \"messages\": [\n    {\n      \"role\": \"string\",\n      \"content\": \"string\"\n    },\n    {\n      \"role\": \"string\",\n      \"content\": \"string\"\n    }\n  ],\n  \"created_at\": \"1954-04-25T02:46:49.152Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e07bfb52-0be1-428e-9992-d23513adcfcf",
+              "name": "Missing or invalid X-API-KEY.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "threads",
+                    ":thread_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "thread_id",
+                      "description": "(Required) The Thread identifier returned by a chat call."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6780e568-5298-48d2-88b2-a02167b0b170",
+          "name": "List threads",
+          "request": {
+            "name": "List threads",
+            "description": {
+              "content": "List Thread objects for a project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "query",
+                "v1",
+                "projects",
+                ":project_id",
+                "threads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page_size",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "page_number",
+                  "value": "1"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "project_id",
+                  "description": "(Required) The kapa.ai project (instance) identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2bbe0ea3-8b1a-404b-afd9-7b7af74ceada",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "projects",
+                    ":project_id",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id",
+                      "description": "(Required) The kapa.ai project (instance) identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 3838,\n  \"results\": [\n    {\n      \"id\": \"df752876-9a1f-3149-5ba4-2ef445ed3896\",\n      \"project_id\": \"677437ba-3777-f6df-1acb-0e673e9b3f6b\",\n      \"messages\": [\n        {\n          \"role\": \"string\",\n          \"content\": \"string\"\n        },\n        {\n          \"role\": \"string\",\n          \"content\": \"string\"\n        }\n      ],\n      \"created_at\": \"1995-01-26T03:36:36.493Z\"\n    },\n    {\n      \"id\": \"60370a7a-6e28-b062-e8c4-e0d0f5b891d4\",\n      \"project_id\": \"ad9f68c8-7511-ea42-a0fa-ff6ccd1b355b\",\n      \"messages\": [\n        {\n          \"role\": \"string\",\n          \"content\": \"string\"\n        },\n        {\n          \"role\": \"string\",\n          \"content\": \"string\"\n        }\n      ],\n      \"created_at\": \"2010-09-17T04:03:55.753Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca898cd7-bbf5-499a-a614-86897b8f9658",
+              "name": "Missing or invalid X-API-KEY.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "query",
+                    "v1",
+                    "projects",
+                    ":project_id",
+                    "threads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page_size",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page_number",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "project_id",
+                      "description": "(Required) The kapa.ai project (instance) identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kapa.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "aa5c4595-4f24-480b-be8d-96650b3e867b",
+    "name": "kapa.ai Query Analytics Threads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the kapa.ai answer platform. Ask a project's kapa.ai instance questions and receive retrieval-augmented answers with sources, run threaded multi-turn conversations (standard and streamed), perform semantic retrieval and keyword search against ingested knowledge sources, submit feedback, and read project, integration, source, and analytics data. All requests are authenticated with an X-API-KEY header.\n\nContact Support:\n Name: kapa.ai Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "kapa.ai Query Analytics Chat API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kapa.ai/query/v1/projects/:project_id/chat",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The kapa.ai project (instance) identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Ask the project's kapa.ai instance a question. Creates a new Thread and returns the retrieval-augmented answer with relevant sources."
+        },
+        {
+          "info": {
+            "name": "Chat streamed",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kapa.ai/query/v1/projects/:project_id/chat/stream",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The kapa.ai project (instance) identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Streamed variant of chat. The answer is delivered incrementally as chunks delimited by the Unicode record separator character (U+241E), so partial answers can be rendered as they are generated."
+        },
+        {
+          "info": {
+            "name": "Custom chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kapa.ai/query/v1/projects/:project_id/chat/custom",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The kapa.ai project (instance) identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Chat using caller-supplied context instead of (or in addition to) the project's ingested knowledge sources."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "kapa.ai Query Analytics Projects API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/org/v1/projects/:project_id",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The kapa.ai project (instance) identifier."
+              }
+            ]
+          },
+          "docs": "Retrieve a single project by id."
+        },
+        {
+          "info": {
+            "name": "List all integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/projects/:project_id/integrations",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The kapa.ai project (instance) identifier."
+              }
+            ]
+          },
+          "docs": "List the integrations configured for a project."
+        },
+        {
+          "info": {
+            "name": "List all sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/ingestion/v1/projects/:project_id/sources",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The kapa.ai project (instance) identifier."
+              }
+            ]
+          },
+          "docs": "List the ingested knowledge sources for a project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

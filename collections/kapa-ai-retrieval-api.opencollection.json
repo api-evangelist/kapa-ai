@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "kapa.ai Query Analytics Retrieval API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Retrieval",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieval",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kapa.ai/query/v1/projects/:project_id/retrieval",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The kapa.ai project (instance) identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Semantic retrieval against the project's ingested knowledge sources without LLM generation. Returns the most relevant chunks in descending order of relevance, for use as context for external LLMs and agents."
+        },
+        {
+          "info": {
+            "name": "Search (deprecated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kapa.ai/query/v1/projects/:project_id/search",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "path",
+                "description": "The kapa.ai project (instance) identifier."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "The search query string."
+              }
+            ]
+          },
+          "docs": "Deprecated fast keyword-based search across the project's knowledge sources. Use the retrieval endpoint for semantic search."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
