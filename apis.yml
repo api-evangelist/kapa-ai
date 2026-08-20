@@ -23,6 +23,12 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/kapa-ai.png
 tags:
+- Artificial Intelligence
+- Answer Engine
+- RAG
+- Documentation
+- Developer Tools
+tags_raw:
 - AI
 - Answer Engine
 - RAG
@@ -122,6 +128,8 @@ apis:
   humanURL: https://docs.kapa.ai/api/reference/query-v-1-projects-chat
   baseURL: https://api.kapa.ai/query/v1
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
