@@ -8,6 +8,18 @@ description: kapa.ai is an AI assistant and answer platform that turns technical
   conversations with streaming answers, perform semantic retrieval and search, and
   pull analytics over projects and threads via a REST interface authenticated with
   an X-API-KEY header.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
