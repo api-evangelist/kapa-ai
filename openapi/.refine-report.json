@@ -1,12 +1,7 @@
 {
   "provider": "kapa-ai",
   "sources": [
-    "kapa-ai-analytics-api-openapi.yml",
-    "kapa-ai-chat-api-openapi.yml",
-    "kapa-ai-feedback-api-openapi.yml",
-    "kapa-ai-projects-api-openapi.yml",
-    "kapa-ai-retrieval-api-openapi.yml",
-    "kapa-ai-threads-api-openapi.yml"
+    "_original/kapa-ai-openapi.yml"
   ],
   "outputs": [
     "kapa-ai-analytics-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "kapa-ai-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "kapa-ai-analytics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kapa-ai-chat-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kapa-ai-feedback-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kapa-ai-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kapa-ai-retrieval-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kapa-ai-threads-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

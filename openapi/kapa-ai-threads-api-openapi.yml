@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: kapa.ai Query Analytics Threads API
+  title: kapa.ai Query Threads API
   description: REST API for the kapa.ai answer platform. Ask a project's kapa.ai instance questions and receive retrieval-augmented answers with sources, run threaded multi-turn conversations (standard and streamed), perform semantic retrieval and keyword search against ingested knowledge sources, submit feedback, and read project, integration, source, and analytics data. All requests are authenticated with an X-API-KEY header.
   termsOfService: https://www.kapa.ai/content/terms-of-service
   contact:
@@ -103,38 +103,17 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    ProjectId:
-      name: project_id
-      in: path
-      required: true
-      description: The kapa.ai project (instance) identifier.
-      schema:
-        type: string
-        format: uuid
-    PageNumber:
-      name: page_number
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 1
-    ThreadId:
-      name: thread_id
-      in: path
-      required: true
-      description: The Thread identifier returned by a chat call.
-      schema:
-        type: string
-        format: uuid
-    PageSize:
-      name: page_size
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 20
   schemas:
+    RelevantSource:
+      type: object
+      properties:
+        source_url:
+          type: string
+          format: uri
+        title:
+          type: string
+        content:
+          type: string
     User:
       type: object
       properties:
@@ -145,6 +124,25 @@ components:
         unique_client_id:
           type: string
           description: Stable client identifier for the end user.
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+    ChatRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The user's question.
+          example: How do I get started?
+        integration_id:
+          type: string
+          description: Integration identifier used to attribute usage analytics; calls without it appear as the "Unknown" integration.
+        user:
+          $ref: '#/components/schemas/User'
     ChatResponse:
       type: object
       properties:
@@ -167,11 +165,6 @@ components:
           description: Sources used to construct the answer.
           items:
             $ref: '#/components/schemas/RelevantSource'
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
     ThreadList:
       type: object
       properties:
@@ -202,30 +195,37 @@ components:
         created_at:
           type: string
           format: date-time
-    RelevantSource:
-      type: object
-      properties:
-        source_url:
-          type: string
-          format: uri
-        title:
-          type: string
-        content:
-          type: string
-    ChatRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-          description: The user's question.
-          example: How do I get started?
-        integration_id:
-          type: string
-          description: Integration identifier used to attribute usage analytics; calls without it appear as the "Unknown" integration.
-        user:
-          $ref: '#/components/schemas/User'
+  parameters:
+    ThreadId:
+      name: thread_id
+      in: path
+      required: true
+      description: The Thread identifier returned by a chat call.
+      schema:
+        type: string
+        format: uuid
+    PageNumber:
+      name: page_number
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: The kapa.ai project (instance) identifier.
+      schema:
+        type: string
+        format: uuid
+    PageSize:
+      name: page_size
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
   responses:
     Unauthorized:
       description: Missing or invalid X-API-KEY.

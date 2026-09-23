@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: kapa.ai Query Analytics Feedback API
+  title: kapa.ai Query Feedback API
   description: REST API for the kapa.ai answer platform. Ask a project's kapa.ai instance questions and receive retrieval-augmented answers with sources, run threaded multi-turn conversations (standard and streamed), perform semantic retrieval and keyword search against ingested knowledge sources, submit feedback, and read project, integration, source, and analytics data. All requests are authenticated with an X-API-KEY header.
   termsOfService: https://www.kapa.ai/content/terms-of-service
   contact:
@@ -40,6 +40,19 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+    FeedbackResponse:
+      type: object
+      properties:
+        question_answer_id:
+          type: string
+          format: uuid
+        reaction:
+          type: string
     FeedbackRequest:
       type: object
       required:
@@ -58,19 +71,6 @@ components:
         comment:
           type: string
           description: Optional free-text feedback.
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-    FeedbackResponse:
-      type: object
-      properties:
-        question_answer_id:
-          type: string
-          format: uuid
-        reaction:
-          type: string
   responses:
     Unauthorized:
       description: Missing or invalid X-API-KEY.

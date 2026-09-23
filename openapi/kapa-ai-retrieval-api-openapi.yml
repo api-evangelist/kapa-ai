@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: kapa.ai Query Analytics Retrieval API
+  title: kapa.ai Query Retrieval API
   description: REST API for the kapa.ai answer platform. Ask a project's kapa.ai instance questions and receive retrieval-augmented answers with sources, run threaded multi-turn conversations (standard and streamed), perform semantic retrieval and keyword search against ingested knowledge sources, submit feedback, and read project, integration, source, and analytics data. All requests are authenticated with an X-API-KEY header.
   termsOfService: https://www.kapa.ai/content/terms-of-service
   contact:
@@ -66,30 +66,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    ProjectId:
-      name: project_id
-      in: path
-      required: true
-      description: The kapa.ai project (instance) identifier.
-      schema:
-        type: string
-        format: uuid
   schemas:
-    RetrievedChunk:
-      type: object
-      properties:
-        content:
-          type: string
-        source_url:
-          type: string
-          format: uri
-        title:
-          type: string
-        score:
-          type: number
-          format: float
-          description: Relevance score in descending order.
     Error:
       type: object
       properties:
@@ -113,6 +90,29 @@ components:
         num_results:
           type: integer
           description: Maximum number of chunks to return.
+    RetrievedChunk:
+      type: object
+      properties:
+        content:
+          type: string
+        source_url:
+          type: string
+          format: uri
+        title:
+          type: string
+        score:
+          type: number
+          format: float
+          description: Relevance score in descending order.
+  parameters:
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: The kapa.ai project (instance) identifier.
+      schema:
+        type: string
+        format: uuid
   responses:
     Unauthorized:
       description: Missing or invalid X-API-KEY.

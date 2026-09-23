@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: kapa.ai Query Analytics Projects API
+  title: kapa.ai Query Projects API
   description: REST API for the kapa.ai answer platform. Ask a project's kapa.ai instance questions and receive retrieval-augmented answers with sources, run threaded multi-turn conversations (standard and streamed), perform semantic retrieval and keyword search against ingested knowledge sources, submit feedback, and read project, integration, source, and analytics data. All requests are authenticated with an X-API-KEY header.
   termsOfService: https://www.kapa.ai/content/terms-of-service
   contact:
@@ -72,6 +72,19 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
     SourceList:
       type: object
       properties:
@@ -88,11 +101,6 @@ components:
               url:
                 type: string
                 format: uri
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
     IntegrationList:
       type: object
       properties:
@@ -108,14 +116,6 @@ components:
                 type: string
               type:
                 type: string
-    Project:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
   parameters:
     ProjectId:
       name: project_id

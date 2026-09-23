@@ -1,0 +1,31 @@
+# Front Door AI Index — kapa-ai — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: kapa-ai
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.kapa.ai
+  final_host: www.kapa.ai
+  ownership: own
+  owner: kapa-ai
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 26
+  host_score: 26
+  density: 26.92
+  words: 966
+  tiers:
+    agentic: 18
+    core: 6
+    model: 2
+  ambiguous: 24
+  top_terms:
+    agent: 24
+    MCP: 10
+    AI agent: 6
+    AI: 6
+    OpenAI: 2
+    agentic: 1
+    embedding: 1
