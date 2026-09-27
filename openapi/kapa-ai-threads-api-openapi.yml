@@ -103,7 +103,43 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    PageSize:
+      name: page_size
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
+    PageNumber:
+      name: page_number
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+    ThreadId:
+      name: thread_id
+      in: path
+      required: true
+      description: The Thread identifier returned by a chat call.
+      schema:
+        type: string
+        format: uuid
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: The kapa.ai project (instance) identifier.
+      schema:
+        type: string
+        format: uuid
   schemas:
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
     RelevantSource:
       type: object
       properties:
@@ -124,25 +160,15 @@ components:
         unique_client_id:
           type: string
           description: Stable client identifier for the end user.
-    Error:
+    ThreadList:
       type: object
       properties:
-        detail:
-          type: string
-    ChatRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-          description: The user's question.
-          example: How do I get started?
-        integration_id:
-          type: string
-          description: Integration identifier used to attribute usage analytics; calls without it appear as the "Unknown" integration.
-        user:
-          $ref: '#/components/schemas/User'
+        count:
+          type: integer
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Thread'
     ChatResponse:
       type: object
       properties:
@@ -165,15 +191,6 @@ components:
           description: Sources used to construct the answer.
           items:
             $ref: '#/components/schemas/RelevantSource'
-    ThreadList:
-      type: object
-      properties:
-        count:
-          type: integer
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Thread'
     Thread:
       type: object
       properties:
@@ -195,37 +212,20 @@ components:
         created_at:
           type: string
           format: date-time
-  parameters:
-    ThreadId:
-      name: thread_id
-      in: path
-      required: true
-      description: The Thread identifier returned by a chat call.
-      schema:
-        type: string
-        format: uuid
-    PageNumber:
-      name: page_number
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 1
-    ProjectId:
-      name: project_id
-      in: path
-      required: true
-      description: The kapa.ai project (instance) identifier.
-      schema:
-        type: string
-        format: uuid
-    PageSize:
-      name: page_size
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 20
+    ChatRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The user's question.
+          example: How do I get started?
+        integration_id:
+          type: string
+          description: Integration identifier used to attribute usage analytics; calls without it appear as the "Unknown" integration.
+        user:
+          $ref: '#/components/schemas/User'
   responses:
     Unauthorized:
       description: Missing or invalid X-API-KEY.

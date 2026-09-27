@@ -40,19 +40,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-    FeedbackResponse:
-      type: object
-      properties:
-        question_answer_id:
-          type: string
-          format: uuid
-        reaction:
-          type: string
     FeedbackRequest:
       type: object
       required:
@@ -71,6 +58,19 @@ components:
         comment:
           type: string
           description: Optional free-text feedback.
+    FeedbackResponse:
+      type: object
+      properties:
+        question_answer_id:
+          type: string
+          format: uuid
+        reaction:
+          type: string
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
   responses:
     Unauthorized:
       description: Missing or invalid X-API-KEY.
