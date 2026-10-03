@@ -156,13 +156,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    PageSize:
-      name: page_size
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 20
     PageNumber:
       name: page_number
       in: query
@@ -170,6 +163,13 @@ components:
       schema:
         type: integer
         default: 1
+    PageSize:
+      name: page_size
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
     ProjectId:
       name: project_id
       in: path

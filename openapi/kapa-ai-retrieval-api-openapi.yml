@@ -67,11 +67,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
     RetrievedChunk:
       type: object
       properties:
@@ -97,6 +92,11 @@ components:
         num_results:
           type: integer
           description: Maximum number of chunks to return.
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
     RetrievalResponse:
       type: object
       properties:

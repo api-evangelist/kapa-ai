@@ -90,31 +90,20 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
+    ChatRequest:
       type: object
+      required:
+      - query
       properties:
-        detail:
+        query:
           type: string
-    RelevantSource:
-      type: object
-      properties:
-        source_url:
+          description: The user's question.
+          example: How do I get started?
+        integration_id:
           type: string
-          format: uri
-        title:
-          type: string
-        content:
-          type: string
-    User:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          description: End-user email for per-user analytics tracking.
-        unique_client_id:
-          type: string
-          description: Stable client identifier for the end user.
+          description: Integration identifier used to attribute usage analytics; calls without it appear as the "Unknown" integration.
+        user:
+          $ref: '#/components/schemas/User'
     ChatResponse:
       type: object
       properties:
@@ -137,20 +126,6 @@ components:
           description: Sources used to construct the answer.
           items:
             $ref: '#/components/schemas/RelevantSource'
-    ChatRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-          description: The user's question.
-          example: How do I get started?
-        integration_id:
-          type: string
-          description: Integration identifier used to attribute usage analytics; calls without it appear as the "Unknown" integration.
-        user:
-          $ref: '#/components/schemas/User'
     CustomChatRequest:
       allOf:
       - $ref: '#/components/schemas/ChatRequest'
@@ -159,6 +134,31 @@ components:
           context:
             type: string
             description: Caller-supplied context to ground the answer.
+    RelevantSource:
+      type: object
+      properties:
+        source_url:
+          type: string
+          format: uri
+        title:
+          type: string
+        content:
+          type: string
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: End-user email for per-user analytics tracking.
+        unique_client_id:
+          type: string
+          description: Stable client identifier for the end user.
   responses:
     Unauthorized:
       description: Missing or invalid X-API-KEY.
