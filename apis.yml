@@ -35,6 +35,10 @@ accessModel:
   generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/kapa-ai.png
+x-docs-platform: docusaurus
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
+x-docs-hosting: vercel
 tags:
 - Artificial Intelligence
 - Answer Engine
@@ -222,6 +226,9 @@ apis:
   - type: Documentation
     url: https://docs.kapa.ai/api/reference
 common:
+- type: CapabilityMap
+  url: capabilities/kapa-ai-capability-edges.yml
+  name: kapa.ai Business Capability Map
 - type: AgenticAccess
   url: agentic-access/kapa-ai-agentic-access.yml
 - type: DomainSecurity
