@@ -71,6 +71,15 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: The kapa.ai project (instance) identifier.
+      schema:
+        type: string
+        format: uuid
   schemas:
     SourceList:
       type: object
@@ -88,6 +97,19 @@ components:
               url:
                 type: string
                 format: uri
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
     IntegrationList:
       type: object
       properties:
@@ -103,19 +125,6 @@ components:
                 type: string
               type:
                 type: string
-    Project:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
   responses:
     Unauthorized:
       description: Missing or invalid X-API-KEY.
@@ -123,15 +132,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    ProjectId:
-      name: project_id
-      in: path
-      required: true
-      description: The kapa.ai project (instance) identifier.
-      schema:
-        type: string
-        format: uuid
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

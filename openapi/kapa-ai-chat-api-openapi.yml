@@ -89,7 +89,24 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: The kapa.ai project (instance) identifier.
+      schema:
+        type: string
+        format: uuid
   schemas:
+    CustomChatRequest:
+      allOf:
+      - $ref: '#/components/schemas/ChatRequest'
+      - type: object
+        properties:
+          context:
+            type: string
+            description: Caller-supplied context to ground the answer.
     ChatRequest:
       type: object
       required:
@@ -126,14 +143,16 @@ components:
           description: Sources used to construct the answer.
           items:
             $ref: '#/components/schemas/RelevantSource'
-    CustomChatRequest:
-      allOf:
-      - $ref: '#/components/schemas/ChatRequest'
-      - type: object
-        properties:
-          context:
-            type: string
-            description: Caller-supplied context to ground the answer.
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: End-user email for per-user analytics tracking.
+        unique_client_id:
+          type: string
+          description: Stable client identifier for the end user.
     RelevantSource:
       type: object
       properties:
@@ -149,16 +168,6 @@ components:
       properties:
         detail:
           type: string
-    User:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          description: End-user email for per-user analytics tracking.
-        unique_client_id:
-          type: string
-          description: Stable client identifier for the end user.
   responses:
     Unauthorized:
       description: Missing or invalid X-API-KEY.
@@ -166,15 +175,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    ProjectId:
-      name: project_id
-      in: path
-      required: true
-      description: The kapa.ai project (instance) identifier.
-      schema:
-        type: string
-        format: uuid
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

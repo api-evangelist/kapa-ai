@@ -103,7 +103,60 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: The kapa.ai project (instance) identifier.
+      schema:
+        type: string
+        format: uuid
+    PageSize:
+      name: page_size
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
+    ThreadId:
+      name: thread_id
+      in: path
+      required: true
+      description: The Thread identifier returned by a chat call.
+      schema:
+        type: string
+        format: uuid
+    PageNumber:
+      name: page_number
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
   schemas:
+    ChatResponse:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: The generated answer to the query.
+        thread_id:
+          type: string
+          format: uuid
+          description: Identifier of the Thread; use it to ask follow-up questions.
+        question_answer_id:
+          type: string
+          format: uuid
+          description: Identifier of this question/answer; used when submitting feedback.
+        is_uncertain:
+          type: boolean
+          description: True when kapa.ai is uncertain about the answer.
+        relevant_sources:
+          type: array
+          description: Sources used to construct the answer.
+          items:
+            $ref: '#/components/schemas/RelevantSource'
     ChatRequest:
       type: object
       required:
@@ -128,28 +181,6 @@ components:
         unique_client_id:
           type: string
           description: Stable client identifier for the end user.
-    ChatResponse:
-      type: object
-      properties:
-        answer:
-          type: string
-          description: The generated answer to the query.
-        thread_id:
-          type: string
-          format: uuid
-          description: Identifier of the Thread; use it to ask follow-up questions.
-        question_answer_id:
-          type: string
-          format: uuid
-          description: Identifier of this question/answer; used when submitting feedback.
-        is_uncertain:
-          type: boolean
-          description: True when kapa.ai is uncertain about the answer.
-        relevant_sources:
-          type: array
-          description: Sources used to construct the answer.
-          items:
-            $ref: '#/components/schemas/RelevantSource'
     ThreadList:
       type: object
       properties:
@@ -195,37 +226,6 @@ components:
       properties:
         detail:
           type: string
-  parameters:
-    PageNumber:
-      name: page_number
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 1
-    PageSize:
-      name: page_size
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 20
-    ProjectId:
-      name: project_id
-      in: path
-      required: true
-      description: The kapa.ai project (instance) identifier.
-      schema:
-        type: string
-        format: uuid
-    ThreadId:
-      name: thread_id
-      in: path
-      required: true
-      description: The Thread identifier returned by a chat call.
-      schema:
-        type: string
-        format: uuid
   responses:
     Unauthorized:
       description: Missing or invalid X-API-KEY.

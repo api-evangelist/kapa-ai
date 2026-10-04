@@ -156,20 +156,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    PageNumber:
-      name: page_number
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 1
-    PageSize:
-      name: page_size
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 20
     ProjectId:
       name: project_id
       in: path
@@ -178,12 +164,20 @@ components:
       schema:
         type: string
         format: uuid
-  schemas:
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
+    PageSize:
+      name: page_size
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 20
+    PageNumber:
+      name: page_number
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
   responses:
     Unauthorized:
       description: Missing or invalid X-API-KEY.
@@ -191,6 +185,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
