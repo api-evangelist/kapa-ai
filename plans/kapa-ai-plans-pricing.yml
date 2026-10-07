@@ -14,6 +14,7 @@ delivery:
   delivery: managed
   method: page
   read: '2026-10-07'
+  managed_tier: Growth
 published: true
 note: Only the 14-day free trial shows a number ($0); Growth is 'Usage-based' (platform fee plus committed
   answers) and Enterprise is 'Custom' — both require contacting sales.
