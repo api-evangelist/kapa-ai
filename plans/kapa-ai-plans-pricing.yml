@@ -1,124 +1,39 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: kapa.ai
-providerId: kapa-ai
-created: '2026-06-20'
-modified: '2026-06-20'
-reconciled: false
-tags:
-- AI
-- Answer Engine
-- RAG
-- Documentation
-- Developer Tools
-- Plans
-description: >-
-  kapa.ai is sold sales-led with custom enterprise pricing rather than a
-  public self-serve price list. Pricing is typically structured as a platform
-  fee plus a licensed volume of questions/answers per month, scaled by team
-  size, number of knowledge bases ingested, user volume, and the level of
-  support. There is no published per-token or per-call public rate card, so the
-  tiers below are representative and not reconciled against an official pricing
-  page.
-notes: >-
-  kapa.ai does not publish a transparent self-serve price list; figures are
-  not available publicly and pricing is negotiated. Contact kapa.ai sales for
-  a quote and reconcile this artifact against any contract or order form.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://www.kapa.ai/pricing
 sources:
 - https://www.kapa.ai/pricing
-- https://docs.kapa.ai/api/overview
-- https://www.kapa.ai/
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T112025
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: negotiated
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-07'
+published: true
+note: Only the 14-day free trial shows a number ($0); Growth is 'Usage-based' (platform fee plus committed
+  answers) and Enterprise is 'Custom' — both require contacting sales.
+plan_count: 3
+currency: USD
 plans:
-- id: kapa-ai-trial
-  name: Trial / Proof of Concept
-  type: trial
-  description: >-
-    Time-boxed evaluation against a customer's own documentation to validate
-    answer quality before a commercial agreement.
-  entries:
-  - label: Evaluation Access
-    name: trial
-    type: trial
-    metric: period
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: contact sales
-    userMultiplied: false
-  elements:
-  - name: Website Widget
-  - name: Docs Q&A
-- id: kapa-ai-platform
-  name: Platform Subscription
-  type: subscription
-  description: >-
-    Annual platform subscription bundling a licensed volume of questions per
-    month across the website widget, in-app assistant, Slack/Discord bots, and
-    the Query API/SDK, with analytics.
-  entries:
-  - label: Platform Fee
-    name: platform_fee
-    type: flat
-    metric: contract
-    limit: -1
-    timeFrame: year
-    geo: global
-    unit: 1
-    price: contact sales
-    userMultiplied: false
-  - label: Included Questions
-    name: questions_included
-    type: usage
-    metric: questions
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: included up to licensed volume
-    userMultiplied: false
-  - label: Question Overage
-    name: questions_overage
-    type: usage
-    metric: questions
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: contact sales (per-question overage)
-    userMultiplied: false
-  elements:
-  - name: Query Chat API
-  - name: Threads / Conversations
-  - name: Retrieval and Search
-  - name: Website Widget
-  - name: In-App Assistant
-  - name: Slack / Discord Bots
-  - name: Analytics
-- id: kapa-ai-enterprise
-  name: Enterprise
-  type: enterprise
-  description: >-
-    Custom enterprise agreements with higher question volumes, multiple
-    knowledge bases, SSO/security review, dedicated support, and negotiated
-    platform and overage terms. Contact kapa.ai sales.
-  entries:
-  - label: Enterprise Agreement
-    name: enterprise
-    type: flat
-    metric: contract
-    limit: -1
-    timeFrame: year
-    geo: global
-    unit: 1
-    price: contact sales
-    userMultiplied: false
-  elements:
-  - name: Custom Volume Pricing
-  - name: Multiple Knowledge Bases
-  - name: SSO and Security Review
-  - name: Dedicated Support
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+- name: Free trial
+  price_text: $0 for 14 days
+  price: 0
+  currency: USD
+  period: one-time
+  included_quota: 1 index, 5,000 pages crawled; 5,000 retrieval queries, 1,000 answers; 1,000 PDF pages/month;
+    500 MB data processed/month; 150 dashboard agent requests/month
+- name: Growth
+  price_text: Usage-based
+  period: none
+  included_quota: Platform fee plus committed answers; sized to you
+- name: Enterprise
+  price_text: Custom
+  period: none
+  included_quota: Everything in Growth, SSO/SCIM/RBAC, EU hosting, premium support and SLA
+rate_limit_statements:
+- Production rate limits and SLA
