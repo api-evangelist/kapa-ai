@@ -89,24 +89,29 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    ProjectId:
-      name: project_id
-      in: path
-      required: true
-      description: The kapa.ai project (instance) identifier.
-      schema:
-        type: string
-        format: uuid
+  responses:
+    Unauthorized:
+      description: Missing or invalid X-API-KEY.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    CustomChatRequest:
-      allOf:
-      - $ref: '#/components/schemas/ChatRequest'
-      - type: object
-        properties:
-          context:
-            type: string
-            description: Caller-supplied context to ground the answer.
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: End-user email for per-user analytics tracking.
+        unique_client_id:
+          type: string
+          description: Stable client identifier for the end user.
     ChatRequest:
       type: object
       required:
@@ -143,16 +148,14 @@ components:
           description: Sources used to construct the answer.
           items:
             $ref: '#/components/schemas/RelevantSource'
-    User:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          description: End-user email for per-user analytics tracking.
-        unique_client_id:
-          type: string
-          description: Stable client identifier for the end user.
+    CustomChatRequest:
+      allOf:
+      - $ref: '#/components/schemas/ChatRequest'
+      - type: object
+        properties:
+          context:
+            type: string
+            description: Caller-supplied context to ground the answer.
     RelevantSource:
       type: object
       properties:
@@ -163,18 +166,15 @@ components:
           type: string
         content:
           type: string
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-  responses:
-    Unauthorized:
-      description: Missing or invalid X-API-KEY.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: The kapa.ai project (instance) identifier.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

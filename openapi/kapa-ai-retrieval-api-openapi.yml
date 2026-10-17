@@ -66,23 +66,7 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    ProjectId:
-      name: project_id
-      in: path
-      required: true
-      description: The kapa.ai project (instance) identifier.
-      schema:
-        type: string
-        format: uuid
   schemas:
-    RetrievalResponse:
-      type: object
-      properties:
-        relevant_sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/RetrievedChunk'
     RetrievalRequest:
       type: object
       required:
@@ -94,6 +78,18 @@ components:
         num_results:
           type: integer
           description: Maximum number of chunks to return.
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+    RetrievalResponse:
+      type: object
+      properties:
+        relevant_sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/RetrievedChunk'
     RetrievedChunk:
       type: object
       properties:
@@ -108,11 +104,6 @@ components:
           type: number
           format: float
           description: Relevance score in descending order.
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
   responses:
     Unauthorized:
       description: Missing or invalid X-API-KEY.
@@ -120,6 +111,15 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: The kapa.ai project (instance) identifier.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
