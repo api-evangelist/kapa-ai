@@ -1,4 +1,4 @@
-# kapa.ai (kapa-ai)
+# kapa.ai
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,137 +66,135 @@
 
 kapa.ai is an AI assistant and answer platform that turns technical documentation, GitHub content, forums, and developer products into a retrieval-augmented chat experience. The kapa.ai Query API lets teams ask questions, run threaded conversations with streaming answers, perform semantic retrieval and search, and pull analytics over projects and threads via a REST interface authenticated with an X-API-KEY header.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/kapa-ai/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/kapa-ai/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Answer Engine · RAG · Documentation · Developer Tools
 
-## Tags
+## kapa.ai on APIs.io
 
-- AI
-- Answer Engine
-- RAG
-- Documentation
-- Developer Tools
+Everything profiled for kapa.ai is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/kapa-ai/](https://apis.io/providers/kapa-ai/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (6)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [kapa.ai Analytics API](https://apis.io/apis/kapa-ai/kapa-ai-analytics-api/) — Activity, coverage gaps, and top questions.
+- [kapa.ai Chat API](https://apis.io/apis/kapa-ai/kapa-ai-chat-api/) — Ask questions and create threads.
+- [kapa.ai Feedback API](https://apis.io/apis/kapa-ai/kapa-ai-feedback-api/) — Submit reactions on answers.
+- [kapa.ai Projects API](https://apis.io/apis/kapa-ai/kapa-ai-projects-api/) — Projects, integrations, and sources.
+- [kapa.ai Retrieval API](https://apis.io/apis/kapa-ai/kapa-ai-retrieval-api/) — Semantic retrieval and keyword search.
+- [kapa.ai Threads API](https://apis.io/apis/kapa-ai/kapa-ai-threads-api/) — List, retrieve, and continue conversations.
 
-## APIs
+### Published properties
 
-### kapa.ai Query Chat API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Ask a project's kapa.ai instance a question and receive a retrieval-augmented answer with relevant sources. Each chat call creates a new Thread; both standard and Server-Sent-Event style streamed variants are available, plus a custom-chat endpoint for supplying your own context.
+#### MCP servers (1)
 
-- **Human URL:** [https://docs.kapa.ai/api/reference/query-v-1-projects-chat](https://docs.kapa.ai/api/reference/query-v-1-projects-chat)
-- **Base URL:** `https://api.kapa.ai/query/v1`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [kapa-ai](https://apis.io/servers/kapa-ai/kapa-ai/)
 
-- Chat
-- Query
-- RAG
-- Streaming
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://docs.kapa.ai/api/quickstart)
-- [API Reference](https://docs.kapa.ai/api/reference/query-v-1-projects-chat)
-- [OpenAPI](openapi/kapa-ai-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kapa-ai.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kapa-ai.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Kapa Ai Agentic Access](https://apis.io/agentic-access/kapa-ai/kapa-ai-agentic-access/)
 
-### kapa.ai Threads Conversations API
+#### Collections (7)
 
-List and retrieve Thread objects and continue a multi-turn conversation by chatting in an existing thread, with standard and streamed follow-up variants and a feedback endpoint for upserting reactions on a question/answer.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://docs.kapa.ai/api/reference](https://docs.kapa.ai/api/reference)
-- **Base URL:** `https://api.kapa.ai/query/v1`
+- [kapa.ai Query API](https://apis.io/collections/kapa-ai/open-kapa-ai/)
+- [kapa.ai Query Analytics API](https://apis.io/collections/kapa-ai/open-kapa-ai-analytics-api/)
+- [kapa.ai Query Analytics Chat API](https://apis.io/collections/kapa-ai/open-kapa-ai-chat-api/)
+- [kapa.ai Query Analytics Feedback API](https://apis.io/collections/kapa-ai/open-kapa-ai-feedback-api/)
+- [kapa.ai Query Analytics Projects API](https://apis.io/collections/kapa-ai/open-kapa-ai-projects-api/)
+- [kapa.ai Query Analytics Retrieval API](https://apis.io/collections/kapa-ai/open-kapa-ai-retrieval-api/)
+- [kapa.ai Query Analytics Threads API](https://apis.io/collections/kapa-ai/open-kapa-ai-threads-api/)
 
-#### Tags
+#### Security (2)
 
-- Threads
-- Conversations
-- Follow Up
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Kapa Ai Authentication](https://apis.io/security/kapa-ai/kapa-ai-authentication/)
+- [Kapa Ai Domain Security](https://apis.io/security/kapa-ai/kapa-ai-domain-security/)
 
-- [Documentation](https://docs.kapa.ai/analytics/conversations)
-- [API Reference](https://docs.kapa.ai/api/reference)
-- [OpenAPI](openapi/kapa-ai-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kapa-ai.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kapa-ai.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### kapa.ai Search and Retrieval API
+Published plans, tiers and prices.
 
-Semantic retrieval that returns the most relevant chunks from a project's ingested knowledge sources without LLM generation, intended to supply context to external LLMs and agents, alongside a deprecated keyword search endpoint.
+- [Kapa Ai Plans Pricing](https://apis.io/plans/kapa-ai/kapa-ai-plans-pricing/)
 
-- **Human URL:** [https://docs.kapa.ai/api/reference/query-v-1-projects-retrieval](https://docs.kapa.ai/api/reference/query-v-1-projects-retrieval)
-- **Base URL:** `https://api.kapa.ai/query/v1`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Search
-- Retrieval
-- Semantic
+- [Kapa Ai Rate Limits](https://apis.io/rate-limits/kapa-ai/kapa-ai-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://docs.kapa.ai/api/reference/query-v-1-projects-retrieval)
-- [OpenAPI](openapi/kapa-ai-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kapa-ai.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kapa-ai.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### kapa.ai Projects API
+- [Kapa Ai Finops](https://apis.io/finops/kapa-ai/kapa-ai-finops/)
 
-Retrieve a project and enumerate the integrations and ingested sources configured for it, scoping every other Query API call to a project_id.
+## Where to find this API
 
-- **Human URL:** [https://docs.kapa.ai/api/overview](https://docs.kapa.ai/api/overview)
-- **Base URL:** `https://api.kapa.ai`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Projects
-- Integrations
-- Sources
-
-#### Properties
-
-- [Documentation](https://docs.kapa.ai/api/overview)
-- [OpenAPI](openapi/kapa-ai-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kapa-ai.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kapa-ai.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### kapa.ai Analytics API
-
-Read usage and quality analytics for a project - activity, question/answers, end users, coverage-gap periods, and top-question periods - to understand how the AI assistant is performing against the knowledge base.
-
-- **Human URL:** [https://docs.kapa.ai/api/reference](https://docs.kapa.ai/api/reference)
-- **Base URL:** `https://api.kapa.ai/query/v1`
-
-#### Tags
-
-- Analytics
-- Coverage Gaps
-- Top Questions
-
-#### Properties
-
-- [Documentation](https://docs.kapa.ai/api/reference)
-- [OpenAPI](openapi/kapa-ai-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kapa-ai.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kapa-ai.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/kapa-ai)
-- [LinkedIn](https://www.linkedin.com/company/kapa-ai)
 - [Website](https://www.kapa.ai)
 - [Documentation](https://docs.kapa.ai)
-- [Plans](plans/kapa-ai-plans-pricing.yml)
-- [Rate Limits](rate-limits/kapa-ai-rate-limits.yml)
-- [Fin Ops](finops/kapa-ai-finops.yml)
+- [Pricing](https://www.kapa.ai/pricing)
+- [Blog](https://www.kapa.ai/blog)
+- [GitHub](https://github.com/kapa-ai)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 36.6** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 50.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 42.1 |
+
+**Agent readiness 42.4** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 10.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/kapa-ai/](https://apis.io/providers/kapa-ai/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for kapa.ai: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/kapa-ai/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
